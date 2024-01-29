@@ -4,7 +4,11 @@
 module.exports = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["app.localhost:3000"],
+      allowedOrigins: [
+        "app.localhost:3000",
+        "https://fruity-tools-fail.loca.lt",
+        "https://app.fruity-tools-fail.loca.lt",
+      ],
     },
   },
   images: {
@@ -18,6 +22,6 @@ module.exports = {
       { hostname: "www.google.com" },
       { hostname: "flag.vercel.app" },
       { hostname: "illustrations.popsy.co" },
-    ]
+    ],
   },
 };
