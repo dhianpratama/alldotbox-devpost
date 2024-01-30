@@ -4,11 +4,7 @@
 module.exports = {
   experimental: {
     serverActions: {
-      allowedOrigins: [
-        "app.localhost:3000",
-        "https://fruity-tools-fail.loca.lt",
-        "https://app.fruity-tools-fail.loca.lt",
-      ],
+      allowedOrigins: ["app.localhost:3000", "secondcourt.com"],
     },
   },
   images: {
