@@ -17,18 +17,17 @@ export default function CreateSiteModal() {
   const [data, setData] = useState({
     name: "",
     subdomain: "",
-    description: "",
   });
 
-  useEffect(() => {
-    setData((prev) => ({
-      ...prev,
-      subdomain: prev.name
-        .toLowerCase()
-        .trim()
-        .replace(/[\W_]+/g, "-"),
-    }));
-  }, [data.name]);
+  // useEffect(() => {
+  //   setData((prev) => ({
+  //     ...prev,
+  //     subdomain: prev.name
+  //       .toLowerCase()
+  //       .trim()
+  //       .replace(/[\W_]+/g, "-"),
+  //   }));
+  // }, [data.name]);
 
   return (
     <form
@@ -56,6 +55,36 @@ export default function CreateSiteModal() {
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
           >
+            Box domain name
+          </label>
+          <select
+            name="name"
+            placeholder="My Awesome Box domain name"
+            autoFocus
+            value={data.name}
+            onChange={(e) =>
+              setData({
+                ...data,
+                name: e.target.value,
+                subdomain: e.target.value,
+              })
+            }
+            required
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+          >
+            {["123", "test", "new"].map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* <div className="flex flex-col space-y-2">
+          <label
+            htmlFor="name"
+            className="text-sm font-medium text-stone-500 dark:text-stone-400"
+          >
             Site Name
           </label>
           <input
@@ -69,9 +98,9 @@ export default function CreateSiteModal() {
             required
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
-        </div>
+        </div> */}
 
-        <div className="flex flex-col space-y-2">
+        {/* <div className="flex flex-col space-y-2">
           <label
             htmlFor="subdomain"
             className="text-sm font-medium text-stone-500"
@@ -95,9 +124,9 @@ export default function CreateSiteModal() {
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col space-y-2">
+        {/* <div className="flex flex-col space-y-2">
           <label
             htmlFor="description"
             className="text-sm font-medium text-stone-500"
@@ -113,7 +142,7 @@ export default function CreateSiteModal() {
             rows={3}
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
-        </div>
+        </div> */}
       </div>
       <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
         <CreateSiteFormButton />
