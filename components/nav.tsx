@@ -17,7 +17,6 @@ import {
   useSelectedLayoutSegments,
 } from "next/navigation";
 import { ReactNode, useEffect, useMemo, useState } from "react";
-import { getSiteFromPostId } from "@/lib/actions";
 import Image from "next/image";
 
 export default function Nav({ children }: { children: ReactNode }) {
@@ -26,13 +25,6 @@ export default function Nav({ children }: { children: ReactNode }) {
 
   const [siteId, setSiteId] = useState<string | null>();
 
-  useEffect(() => {
-    if (segments[0] === "post" && id) {
-      getSiteFromPostId(id).then((id) => {
-        setSiteId(id);
-      });
-    }
-  }, [segments, id]);
 
   const tabs = useMemo(() => {
     if (segments[0] === "site" && id) {
@@ -89,18 +81,18 @@ export default function Nav({ children }: { children: ReactNode }) {
         isActive: segments.length === 0,
         icon: <LayoutDashboard width={18} />,
       },
-      {
-        name: "Sites",
-        href: "/sites",
-        isActive: segments[0] === "sites",
-        icon: <Globe width={18} />,
-      },
-      {
-        name: "Settings",
-        href: "/settings",
-        isActive: segments[0] === "settings",
-        icon: <Settings width={18} />,
-      },
+      // {
+      //   name: "Sites",
+      //   href: "/sites",
+      //   isActive: segments[0] === "sites",
+      //   icon: <Globe width={18} />,
+      // },
+      // {
+      //   name: "Settings",
+      //   href: "/settings",
+      //   isActive: segments[0] === "settings",
+      //   icon: <Settings width={18} />,
+      // },
     ];
   }, [segments, id, siteId]);
 

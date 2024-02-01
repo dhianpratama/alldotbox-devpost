@@ -31,7 +31,7 @@ export default function SiweLoginButton() {
 
   const handleLogin = async () => {
     try {
-      const callbackUrl = "/site"
+      const callbackUrl = "/"
       const message = new SiweMessage({
         domain: window.location.host,
         address: address,
@@ -45,11 +45,11 @@ export default function SiweLoginButton() {
         message: message.prepareMessage(),
       });
 
-      signIn("credentials", {
+      await  signIn("credentials", {
         message: JSON.stringify(message),
-        redirect: false,
+        redirect: true,
         signature,
-        callbackUrl,
+        callbackUrl:`${window.location.origin}${callbackUrl}`,
       })
     } catch (error) {
       window.alert(error)
