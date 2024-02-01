@@ -1,9 +1,9 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Post, Site } from "@prisma/client";
+import { Site } from "@prisma/client";
 import { revalidateTag } from "next/cache";
-import { withPostAuth, withSiteAuth } from "./auth";
+import {  withSiteAuth } from "./auth";
 import { getSession } from "@/lib/auth";
 import {
   addDomainToVercel,
