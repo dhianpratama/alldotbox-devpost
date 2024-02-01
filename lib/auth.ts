@@ -1,4 +1,4 @@
-import { getServerSession, type NextAuthOptions } from "next-auth";
+import { getServerSession, type NextAuthOptions, type DefaultSession  } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GooglePovider from "next-auth/providers/google";
@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: "0x0",
         },
       },
-      async authorize(credentials,req) {
+      async authorize(credentials, req) {
         try {
           const siwe = new SiweMessage(
             JSON.parse(credentials?.message || "{}"),
@@ -39,10 +39,32 @@ export const authOptions: NextAuthOptions = {
             nonce: await getCsrfToken({ req }),
           });
 
-
           if (result.success) {
+            // Check if user exists
+            let user = await prisma.user.findUnique({
+              where: {
+                address: siwe.address,
+              },
+            });
+            // Create new user if doesn't exist
+            if (!user) {
+              user = await prisma.user.create({
+                data: {
+                  address: siwe.address,
+                },
+              });
+              // create account
+              await prisma.account.create({
+                data: {
+                  userId: user.id,
+                  type: "credentials",
+                  provider: "Ethereum",
+                  providerAccountId: siwe.address,
+                },
+              });
+            }
             return {
-              id: siwe.address,
+              id: user.id,
             };
           }
           return null;
@@ -75,12 +97,18 @@ export const authOptions: NextAuthOptions = {
     },
   },
   callbacks: {
-    async session({ session, token }: { session: any; token: any }) {
-      console.log(">>>>>>>>>>>>>>>> session:: ", session, token);
-      session.user.address = token.sub;
-      session.user.name = token.sub;
-      return session;
-    },
+    // async session({ session, token }: { session: any; token: any }) {
+    //   session.user.address = token.sub;
+    //   session.user.name = token.sub;
+    //   return session;
+    // },
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
   },
 };
 

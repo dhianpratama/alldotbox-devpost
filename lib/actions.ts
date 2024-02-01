@@ -222,8 +222,6 @@ export const deleteSite = withSiteAuth(async (_: FormData, site: Site) => {
   }
 });
 
-
-
 export const editUser = async (
   formData: FormData,
   _id: unknown,

@@ -1,17 +1,20 @@
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
-import SiteCard from "./site-card";
+import DomainCard from "./domain-card";
 import Image from "next/image";
+import { getUserDomains } from "@/lib/reservoir";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
-  const sites = [];
-  
-  // await prisma.site.findMany({
+
+  const userSites = await getUserDomains("0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7","0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17");
+  console.log("session::nitin: ",userSites);
+
+  // const sites = await prisma.site.findMany({
   //   where: {
   //     user: {
   //       id: session.user.id as string,
@@ -23,10 +26,10 @@ export default async function Sites({ limit }: { limit?: number }) {
   //   ...(limit ? { take: limit } : {}),
   // });
 
-  return sites.length > 0 ? (
+  return userSites.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {sites.map((site) => (
-        <SiteCard key={site.id} data={site} />
+      {userSites.map((site:any) => (
+        <DomainCard key={site.token.tokenId} data={site.token} />
       ))}
     </div>
   ) : (

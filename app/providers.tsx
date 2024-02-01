@@ -10,9 +10,7 @@ import {
   getDefaultWallets,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
-import {
-  optimism,
-} from "wagmi/chains";
+import { optimism } from "wagmi/chains";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [optimism],
@@ -37,19 +35,19 @@ const wagmiConfig = createConfig({
 });
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <SessionProvider>
-      <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider
-          appInfo={{
-            appName: "AllBox",
-          }}
-          chains={chains}
-        >
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider
+        appInfo={{
+          appName: "AllBox",
+        }}
+        chains={chains}
+      >
+        <SessionProvider>
           <Toaster className="dark:hidden" />
           <Toaster theme="dark" className="hidden dark:block" />
           <ModalProvider>{children}</ModalProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </SessionProvider>
+        </SessionProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
