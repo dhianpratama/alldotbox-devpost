@@ -21,7 +21,7 @@ import {
   useSelectedLayoutSegments,
 } from "next/navigation";
 import { ReactNode, useEffect, useMemo, useState } from "react";
-import { getSiteFromPostId } from "@/lib/actions";
+
 import Image from "next/image";
 
 const externalLinks = [
@@ -68,13 +68,13 @@ export default function Nav({ children }: { children: ReactNode }) {
 
   const [siteId, setSiteId] = useState<string | null>();
 
-  useEffect(() => {
-    if (segments[0] === "post" && id) {
-      getSiteFromPostId(id).then((id) => {
-        setSiteId(id);
-      });
-    }
-  }, [segments, id]);
+  // useEffect(() => {
+  //   if (segments[0] === "post" && id) {
+  //     getSiteFromPostId(id).then((id) => {
+  //       setSiteId(id);
+  //     });
+  //   }
+  // }, [segments, id]);
 
   const tabs = useMemo(() => {
     if (segments[0] === "site" && id) {
