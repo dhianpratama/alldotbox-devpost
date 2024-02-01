@@ -11,8 +11,10 @@ export default async function Sites({ limit }: { limit?: number }) {
     redirect("/login");
   }
 
-  const userSites = await getUserDomains("0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7","0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17");
-  console.log("session::nitin: ",userSites);
+  const { tokens } = await getUserDomains(
+    "0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7",
+    "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
+  );
 
   // const sites = await prisma.site.findMany({
   //   where: {
@@ -26,9 +28,9 @@ export default async function Sites({ limit }: { limit?: number }) {
   //   ...(limit ? { take: limit } : {}),
   // });
 
-  return userSites.length > 0 ? (
+  return tokens.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {userSites.map((site:any) => (
+      {tokens.map((site: any) => (
         <DomainCard key={site.token.tokenId} data={site.token} />
       ))}
     </div>

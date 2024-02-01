@@ -14,17 +14,20 @@ import { getUserDomains } from "@/lib/reservoir";
 export default function CreateSiteModal() {
   const router = useRouter();
   const modal = useModal();
-  const [userDomains, setUserDomains] = useState([]);
   const [data, setData] = useState({
     name: "",
     subdomain: "",
   });
+  const [userDomains, setUserDomains] = useState([]);
 
-  
-
-  // useEffect(()=>{
-  //   fetchUserDomains();
-  // },[])
+  useEffect(() => {
+    getUserDomains(
+      "0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7",
+      "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
+    ).then(({ tokens }) => {
+      setUserDomains(tokens);
+    });
+  }, []);
 
   // useEffect(() => {
   //   setData((prev) => ({
@@ -80,8 +83,8 @@ export default function CreateSiteModal() {
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           >
             {userDomains.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
+              <option key={index} value={option?.token?.name}>
+                {option?.token?.name}
               </option>
             ))}
           </select>

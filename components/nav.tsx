@@ -124,10 +124,7 @@ export default function Nav({ children }: { children: ReactNode }) {
       >
         <div className="grid gap-2">
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
-            <a
-              href="https://vercel.com/templates/next.js/platforms-starter-kit"
-              target="_blank"
-              rel="noopener noreferrer"
+            <span
               className="rounded-lg p-1.5 hover:bg-stone-200 dark:hover:bg-stone-700"
             >
               <svg
@@ -142,7 +139,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                   fill="currentColor"
                 />
               </svg>
-            </a>
+            </span>
             <div className="h-6 rotate-[30deg] border-l border-stone-400 dark:border-stone-500" />
             <Link
               href="/"
