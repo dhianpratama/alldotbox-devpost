@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import CreateSiteButton from "./create-site-button";
 import CreateSiteModal from "./modal/create-site";
 import Link from "next/link";
+import { getUserDomains } from "@/lib/reservoir";
 
 export default async function OverviewSitesCTA() {
   const session = await getSession();
@@ -15,6 +16,11 @@ export default async function OverviewSitesCTA() {
     },
   });
 
+  const userSites = await getUserDomains(
+    "0x272DBB81755A2247D675BBbAFDF0C3ccd886C9ad",
+    "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+  );
+
   return sites > 0 ? (
     <Link
       href="/sites"
@@ -24,7 +30,7 @@ export default async function OverviewSitesCTA() {
     </Link>
   ) : (
     <CreateSiteButton>
-      <CreateSiteModal />
+      <CreateSiteModal/>
     </CreateSiteButton>
   );
 }

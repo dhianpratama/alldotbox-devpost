@@ -8,7 +8,10 @@ module.exports = {
     },
   },
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
+      { hostname: "img.reservoir.tools" },
+      { hostname: "hj8ykf3o8klhiqnj.public.blob.vercel-storage.com" },
       { hostname: "public.blob.vercel-storage.com" },
       { hostname: "res.cloudinary.com" },
       { hostname: "abs.twimg.com" },
