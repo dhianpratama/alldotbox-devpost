@@ -116,6 +116,7 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  background-color: black;
 }
 
 .bg-image {
