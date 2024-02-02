@@ -82,8 +82,10 @@ export default async function SiteHomePage({
         {/* <!-- Content Container --> */}
         <div className="content-container space-y-8">
           {/* <!-- Your Title, Subtitle, and Button --> */}
-          <h1 className="text-9xl font-bold text-white">Cyber.Box</h1>
-          <p className="text-4xl text-white">
+          <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl">
+            Cyber.Box
+          </h1>
+          <p className="text-xl text-white  sm:text-2xl  md:text-3xl lg:text-4xl">
             This is a Web2 + Web3 domain name, and the domain name is on sale.
           </p>
 
@@ -92,7 +94,9 @@ export default async function SiteHomePage({
             target="_blank"
             className="verflow-hidden relative mx-auto flex w-52 min-w-[40px]  items-center justify-center rounded border border-pink-400 bg-white p-4 text-pink-400 shadow-2xl transition-all before:absolute before:left-0 before:top-0 before:h-full before:w-0 before:duration-500 after:absolute after:right-0 after:top-0 after:h-full after:w-0 after:duration-500 hover:text-white hover:shadow-pink-400 hover:before:w-2/4 hover:before:bg-pink-400 hover:after:w-2/4 hover:after:bg-pink-400"
           >
-            <span className="relative z-10  text-4xl font-bold ">Contact</span>
+            <span className="relative z-10 text-xl  font-bold sm:text-2xl  md:text-3xl lg:text-4xl ">
+              Contact
+            </span>
           </a>
         </div>
       </div>
