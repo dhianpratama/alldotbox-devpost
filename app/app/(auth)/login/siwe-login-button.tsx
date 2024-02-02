@@ -52,7 +52,8 @@ export default function SiweLoginButton() {
         callbackUrl:`${window.location.origin}${callbackUrl}`,
       })
     } catch (error) {
-      window.alert(error)
+      setLoading(false);
+      toast.error("Failed to Connect Wallet");
     }
   }
   useEffect(() => {

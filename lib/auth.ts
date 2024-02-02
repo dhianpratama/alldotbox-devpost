@@ -97,18 +97,17 @@ export const authOptions: NextAuthOptions = {
     },
   },
   callbacks: {
-    // async session({ session, token }: { session: any; token: any }) {
-    //   session.user.address = token.sub;
-    //   session.user.name = token.sub;
-    //   return session;
-    // },
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    async session({ session, token }: { session: any; token: any }) {
+      session.user.id = token.sub;
+      return session;
+    },
+    // session: ({ session, token }) => ({
+    //   ...session,
+    //   user: {
+    //     ...session.user,
+    //     id: token.sub,
+    //   },
+    // }),
   },
 };
 
