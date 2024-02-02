@@ -1,5 +1,4 @@
 import { headers } from "next/headers";
-import { getPostsForSite } from "@/lib/fetchers";
 
 export default async function Sitemap() {
   const headersList = headers();
@@ -13,10 +12,6 @@ export default async function Sitemap() {
     {
       url: `https://${domain}`,
       lastModified: new Date(),
-    },
-    ...posts.map(({ slug }) => ({
-      url: `https://${domain}/${slug}`,
-      lastModified: new Date(),
-    })),
+    }
   ];
 }

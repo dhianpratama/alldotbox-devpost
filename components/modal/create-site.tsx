@@ -18,7 +18,7 @@ export default function CreateSiteModal() {
     name: "",
     subdomain: "",
   });
-  const [userDomains, setUserDomains] = useState([]);
+  const [userDomains, setUserDomains] = useState<any[]>([])
 
   useEffect(() => {
     getUserDomains(
@@ -69,7 +69,6 @@ export default function CreateSiteModal() {
           </label>
           <select
             name="name"
-            placeholder="My Awesome Box domain name"
             autoFocus
             value={data.name}
             onChange={(e) =>
@@ -82,6 +81,7 @@ export default function CreateSiteModal() {
             required
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           >
+            <option value="" disabled selected>My Awesome Box domain name</option>
             {userDomains.map((option, index) => (
               <option key={index} value={option?.token?.name}>
                 {option?.token?.name}

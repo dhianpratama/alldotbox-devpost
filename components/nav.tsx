@@ -31,45 +31,8 @@ export default function Nav({ children }: { children: ReactNode }) {
         {
           name: "Back to All Sites",
           href: "/",
+          isActive: segments.length === 0,
           icon: <ArrowLeft width={18} />,
-        },
-        // {
-        //   name: "Posts",
-        //   href: `/site/${id}`,
-        //   isActive: segments.length === 2,
-        //   icon: <Newspaper width={18} />,
-        // },
-        // {
-        //   name: "Analytics",
-        //   href: `/site/${id}/analytics`,
-        //   isActive: segments.includes("analytics"),
-        //   icon: <BarChart3 width={18} />,
-        // },
-        // {
-        //   name: "Settings",
-        //   href: `/site/${id}/settings`,
-        //   isActive: segments.includes("settings"),
-        //   icon: <Settings width={18} />,
-        // },
-      ];
-    } else if (segments[0] === "post" && id) {
-      return [
-        {
-          name: "Back to All Posts",
-          href: siteId ? `/site/${siteId}` : "/sites",
-          icon: <ArrowLeft width={18} />,
-        },
-        {
-          name: "Editor",
-          href: `/post/${id}`,
-          isActive: segments.length === 2,
-          icon: <Edit3 width={18} />,
-        },
-        {
-          name: "Settings",
-          href: `/post/${id}/settings`,
-          isActive: segments.includes("settings"),
-          icon: <Settings width={18} />,
         },
       ];
     }
@@ -80,18 +43,6 @@ export default function Nav({ children }: { children: ReactNode }) {
         isActive: segments.length === 0,
         icon: <LayoutDashboard width={18} />,
       },
-      // {
-      //   name: "Sites",
-      //   href: "/sites",
-      //   isActive: segments[0] === "sites",
-      //   icon: <Globe width={18} />,
-      // },
-      // {
-      //   name: "Settings",
-      //   href: "/settings",
-      //   isActive: segments[0] === "settings",
-      //   icon: <Settings width={18} />,
-      // },
     ];
   }, [segments, id, siteId]);
 
@@ -107,12 +58,7 @@ export default function Nav({ children }: { children: ReactNode }) {
   return (
     <>
       <button
-        className={`fixed z-20 ${
-          // left align for Editor, right align for other pages
-          segments[0] === "post" && segments.length === 2 && !showSidebar
-            ? "left-5 top-5"
-            : "right-5 top-7"
-        } sm:hidden`}
+        className={`fixed z-20 right-5 top-7 sm:hidden`}
         onClick={() => setShowSidebar(!showSidebar)}
       >
         <Menu width={20} />

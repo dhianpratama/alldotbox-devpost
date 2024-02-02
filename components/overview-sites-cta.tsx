@@ -30,7 +30,7 @@ export default async function OverviewSitesCTA() {
     </Link>
   ) : (
     <CreateSiteButton>
-      <CreateSiteModal userSites={userSites}/>
+      <CreateSiteModal/>
     </CreateSiteButton>
   );
 }
