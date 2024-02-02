@@ -10,10 +10,10 @@ import {
   getDefaultWallets,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
-import { optimism } from "wagmi/chains";
+import { mainnet } from "wagmi/chains";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [optimism],
+  [mainnet],
   [publicProvider()],
 );
 
