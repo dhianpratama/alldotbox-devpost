@@ -1,7 +1,5 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider from "next-auth/providers/github";
-import GooglePovider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import { getCsrfToken } from "next-auth/react";
@@ -64,7 +62,7 @@ export const authOptions: NextAuthOptions = {
               });
             }
             return {
-              id: user.id,
+              id: siwe.address,
             };
           }
           return null;
@@ -80,7 +78,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login", // Error code passed in query string as ?error=
   },
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt",maxAge: 3000 },
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
@@ -98,7 +96,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token }: { session: any; token: any }) {
-      session.user.id = token.sub;
+      session.user.address = token.sub;
       return session;
     },
     // session: ({ session, token }) => ({

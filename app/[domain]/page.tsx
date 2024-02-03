@@ -19,7 +19,6 @@ export async function generateStaticParams() {
       subdomain: "demo",
     },
   });
-  console.log({ allSites });
   const allPaths = allSites
     .flatMap(({ subdomain, customDomain }) => [
       subdomain && {

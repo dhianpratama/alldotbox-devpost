@@ -12,7 +12,7 @@ export default async function Sites({ limit }: { limit?: number }) {
   }
 
   const { tokens } = await getUserDomains(
-    "0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7",
+    session.user.address,
     "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
   );
 

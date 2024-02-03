@@ -4,7 +4,7 @@
 module.exports = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["app.localhost:3000", "secondcourt.com"],
+      allowedOrigins: ["app.localhost:3000", "secondcourt.com", "alldotbox.com"],
     },
   },
   images: {
