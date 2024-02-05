@@ -1,10 +1,12 @@
+import LogoutButton from "./logout-button";
+import { ReactNode } from "react";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import LogoutButton from "./logout-button";
 
 export default async function Profile() {
   const session = await getSession();
+
   if (!session?.user) {
     redirect("/login");
   }
@@ -23,7 +25,7 @@ export default async function Profile() {
           className="h-6 w-6 rounded-full"
         />
         <span className="truncate text-sm font-medium">
-          {/* {"address"} */}
+          {session?.user?.address}
         </span>
       </span>
       <LogoutButton />

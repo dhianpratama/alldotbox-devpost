@@ -4,19 +4,16 @@ import LoadingDots from "@/components/icons/loading-dots";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi"
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { SiweMessage } from "siwe"
-import { getCsrfToken, signIn, useSession } from "next-auth/react"
+import { useAccount, useConnect, useSignMessage } from "wagmi";
+import { SiweMessage } from "siwe";
+import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { injected } from "wagmi/connectors";
 
 export default function SiweLoginButton() {
-  const { signMessageAsync } = useSignMessage()
-  const { chain } = useNetwork()
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  const { data: session, status } = useSession()
+  const { signMessageAsync } = useSignMessage();
+  const { chain, address, isConnected} = useAccount();
+  const { connect } = useConnect();
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
 
   
@@ -31,7 +28,7 @@ export default function SiweLoginButton() {
 
   const handleLogin = async () => {
     try {
-      const callbackUrl = "/"
+      const callbackUrl = "/";
       const message = new SiweMessage({
         domain: window.location.host,
         address: address,
@@ -40,28 +37,27 @@ export default function SiweLoginButton() {
         version: "1",
         chainId: chain?.id,
         nonce: await getCsrfToken(),
-      })
+      });
       const signature = await signMessageAsync({
         message: message.prepareMessage(),
       });
 
-      await  signIn("credentials", {
+      await signIn("credentials", {
         message: JSON.stringify(message),
         redirect: true,
         signature,
-        callbackUrl:`${window.location.origin}${callbackUrl}`,
-      })
+        callbackUrl: `${window.location.origin}${callbackUrl}`,
+      });
     } catch (error) {
       setLoading(false);
       toast.error("Failed to Connect Wallet");
     }
-  }
+  };
   useEffect(() => {
-    console.log(isConnected);
     if (isConnected && !session) {
-      handleLogin()
+      handleLogin();
     }
-  }, [isConnected])
+  }, [isConnected]);
 
   return (
     <button
@@ -69,9 +65,9 @@ export default function SiweLoginButton() {
       onClick={() => {
         setLoading(true);
         if (!isConnected) {
-          connect()
+          connect({ connector: injected() });
         } else {
-          handleLogin()
+          handleLogin();
         }
       }}
       className={`${

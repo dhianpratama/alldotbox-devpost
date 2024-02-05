@@ -12,7 +12,6 @@ export const getUserDomains = async (
   contract: string,
 ) => {
   const url = `${RESERVOIR_URL}/users/${walletAddress}/tokens/v9?contract=${contract}`;
-  console.log(url);
   
   return await fetch(
     url,

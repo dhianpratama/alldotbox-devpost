@@ -4,6 +4,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { headers } from 'next/headers' 
+import { cookieToInitialState } from 'wagmi'
+import { config } from "@/lib/wagmi";
 
 const title =
   "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
@@ -35,10 +38,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const initialState = cookieToInitialState( 
+    config, 
+    headers().get('cookie') 
+  ) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
-        <Providers>
+        <Providers initialState={initialState!}>
           {children}
           <Analytics />
         </Providers>
