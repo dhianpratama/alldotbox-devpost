@@ -4,7 +4,7 @@ import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
-export default async function Profile({ children }: { children: ReactNode }) {
+export default async function Profile() {
   const session = await getSession();
 
   if (!session?.user) {

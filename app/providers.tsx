@@ -19,7 +19,7 @@ export function Providers({
   const queryClient = new QueryClient();
 
   return (
-    <WagmiProvider config={config} initialState={initialState}>
+    <WagmiProvider config={config} initialState={initialState!}>
       <QueryClientProvider client={queryClient}>
         <SessionProvider>
           <Toaster className="dark:hidden" />
