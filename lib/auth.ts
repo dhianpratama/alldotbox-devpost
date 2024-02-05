@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
           const result = await siwe.verify({
             signature: credentials?.signature || "",
             domain: nextAuthUrl.host,
-            nonce: await getCsrfToken({ req }),
+            nonce: await getCsrfToken({ req: { headers: req.headers } }),
           });
 
           if (result.success) {
@@ -78,7 +78,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login", // Error code passed in query string as ?error=
   },
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt",maxAge: 3000 },
+  session: { strategy: "jwt", maxAge: 3000 },
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,

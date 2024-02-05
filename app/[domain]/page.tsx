@@ -1,12 +1,6 @@
-import Link from "next/link";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import BlurImage from "@/components/blur-image";
-import { placeholderBlurhash, toDateString } from "@/lib/utils";
-
 import { getSiteData } from "@/lib/fetchers";
-import Image from "next/image";
-import Head from "next/head";
 
 export async function generateStaticParams() {
   const allSites = await prisma.site.findMany({

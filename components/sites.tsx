@@ -7,6 +7,7 @@ import { getUserDomains } from "@/lib/reservoir";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
+
   if (!session) {
     redirect("/login");
   }
@@ -28,7 +29,7 @@ export default async function Sites({ limit }: { limit?: number }) {
   //   ...(limit ? { take: limit } : {}),
   // });
 
-  return tokens.length > 0 ? (
+  return tokens?.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {tokens.map((site: any) => (
         <DomainCard key={site.token.tokenId} data={site.token} />

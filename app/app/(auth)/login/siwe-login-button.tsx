@@ -11,19 +11,12 @@ import { injected } from "wagmi/connectors";
 
 export default function SiweLoginButton() {
   const { signMessageAsync } = useSignMessage();
-  const { chain, address, isConnected, chainId, addresses } = useAccount();
+  const { chain, address, isConnected} = useAccount();
   const { connect } = useConnect();
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
 
-  console.log(">>>>>>>>>> isConnected ", {
-    chain,
-    address,
-    isConnected,
-    chainId,
-    addresses,
-  });
-
+  
   // Get error message added by next/auth in URL.
   const searchParams = useSearchParams();
   const error = searchParams?.get("error");
