@@ -11,12 +11,11 @@ import { injected } from "wagmi/connectors";
 
 export default function SiweLoginButton() {
   const { signMessageAsync } = useSignMessage();
-  const { chain, address, isConnected} = useAccount();
+  const { chain, address, isConnected } = useAccount();
   const { connect } = useConnect();
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
 
-  
   // Get error message added by next/auth in URL.
   const searchParams = useSearchParams();
   const error = searchParams?.get("error");
@@ -81,7 +80,7 @@ export default function SiweLoginButton() {
       ) : (
         <>
           <p className="text-sm font-medium text-stone-600 dark:text-stone-400">
-            Sign In with Etherium
+            Sign in With Ethereum
           </p>
         </>
       )}
