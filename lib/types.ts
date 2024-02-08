@@ -56,3 +56,13 @@ export interface DomainVerificationResponse {
     reason: string;
   }[];
 }
+
+export interface CreateSiteProps {
+  name: string;
+  subdomain: string;
+  description: string;
+  tokenId: string;
+  contract: string;
+  chainId: string;
+  customDomain: string;
+}

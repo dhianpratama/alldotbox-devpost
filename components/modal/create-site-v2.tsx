@@ -11,48 +11,36 @@ import va from "@vercel/analytics";
 import { useEffect, useState } from "react";
 import { getUserDomains } from "@/lib/reservoir";
 import { useSession } from "next-auth/react";
+import { CreateSiteProps } from "@/lib/types";
 
-export default function CreateSiteModal() {
-  const { data: session, status } = useSession();
+export default function CreateSiteModalV2({
+  siteData,
+}: {
+  siteData: CreateSiteProps;
+}) {
   const router = useRouter();
   const modal = useModal();
   const [data, setData] = useState({
-    name: "",
-    subdomain: "",
+    name: siteData.name,
+    subdomain: siteData.subdomain,
+    description: siteData.description || "",
+    tokenId: siteData.tokenId || "",
+    contract: siteData.contract || "",
+    chainId: siteData.chainId || "",
+    customDomain:siteData.customDomain || ""
   });
-  const [userDomains, setUserDomains] = useState<any[]>([]);
-
-
-  useEffect(() => {
-    getUserDomains(
-      session?.user?.address,
-      "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
-    ).then(({ tokens }) => {
-      setUserDomains(tokens);
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   setData((prev) => ({
-  //     ...prev,
-  //     subdomain: prev.name
-  //       .toLowerCase()
-  //       .trim()
-  //       .replace(/[\W_]+/g, "-"),
-  //   }));
-  // }, [data.name]);
 
   return (
     <form
-      action={async (data: FormData) =>
-        createSite(data).then((res: any) => {
+      action={async (formdata: FormData) =>
+        createSite(formdata).then((res: any) => {
           if (res.error) {
             toast.error(res.error);
           } else {
             va.track("Created Site");
             const { id } = res;
             router.refresh();
-            router.push(`/site/${id}`);
+            // router.push(`/site/${id}`);
             modal?.hide();
             toast.success(`Successfully created site!`);
           }
@@ -68,71 +56,43 @@ export default function CreateSiteModal() {
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
           >
-            Box domain name
-          </label>
-          <select
-            name="name"
-            autoFocus
-            value={data.name}
-            onChange={(e) =>
-              setData({
-                ...data,
-                name: e.target.value,
-                subdomain: e.target.value,
-              })
-            }
-            required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
-          >
-            <option value="" disabled selected>
-              My Awesome Box domain name
-            </option>
-            {userDomains?.map((option, index) => (
-              <option key={index} value={option?.token?.name}>
-                {option?.token?.name || option?.token?.tokenId}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* <div className="flex flex-col space-y-2">
-          <label
-            htmlFor="name"
-            className="text-sm font-medium text-stone-500 dark:text-stone-400"
-          >
-            Site Name
+            Domain Name
           </label>
           <input
             name="name"
             type="text"
             placeholder="My Awesome Site"
             autoFocus
+            defaultValue={data.name}
             value={data.name}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
+            // onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
+            readOnly
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
-        </div> */}
+        </div>
 
         <div className="flex flex-col space-y-2">
           <label
             htmlFor="subdomain"
             className="text-sm font-medium text-stone-500"
           >
-            Subdomain
+            Your Address will be
           </label>
           <div className="flex w-full max-w-md">
             <input
               name="subdomain"
               type="text"
               placeholder="subdomain"
+              defaultValue={data.subdomain}
               value={data.subdomain}
-              onChange={(e) => setData({ ...data, subdomain: e.target.value })}
+              //   onChange={(e) => setData({ ...data, subdomain: e.target.value })}
               autoCapitalize="off"
               pattern="[a-zA-Z0-9\-]+" // only allow lowercase letters, numbers, and dashes
               maxLength={32}
               required
+              readOnly
               className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
             <div className="flex items-center rounded-r-lg border border-l-0 border-stone-200 bg-stone-100 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
@@ -141,7 +101,7 @@ export default function CreateSiteModal() {
           </div>
         </div>
 
-        {/* <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2">
           <label
             htmlFor="description"
             className="text-sm font-medium text-stone-500"
@@ -155,9 +115,38 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, description: e.target.value })}
             maxLength={140}
             rows={3}
+            required
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
-        </div> */}
+        </div>
+        <input
+          name="tokenId"
+          type="hidden"
+          placeholder="tokenId"
+          value={data.tokenId}
+          className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+        />
+        <input
+          name="contract"
+          type="hidden"
+          placeholder="contract"
+          value={data.contract}
+          className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+        />
+        <input
+          name="chainId"
+          type="hidden"
+          placeholder="chainId"
+          value={data.chainId}
+          className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+        />
+        <input
+          name="customDomain"
+          type="hidden"
+          placeholder="customDomain"
+          value={data.customDomain}
+          className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+        />
       </div>
       <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
         <CreateSiteFormButton />
