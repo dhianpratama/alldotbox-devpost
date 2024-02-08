@@ -29,16 +29,16 @@ export default async function Sites({ limit }: { limit?: number }) {
     ...(limit ? { take: limit } : {}),
   });
 
-  return tokens?.length > 0 ? (
+  const ownerTokens = tokens.map(({ token }: { token: any }) => {
+    const dbSite = sites.find((s) => s.tokenId === token.tokenId);
+    return { ...dbSite, isLive: !!dbSite, token };
+  });
+
+  return ownerTokens?.length > 0 ? (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {tokens.map((site: any) => (
-          <DomainCard key={site.token.tokenId} data={site.token} />
-        ))}
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {sites.map((site: any) => (
-          <DomainCard key={site?.id} data={site} />
+        {ownerTokens.map((site: any) => (
+          <DomainCard key={site.tokenId} data={site} />
         ))}
       </div>
     </>

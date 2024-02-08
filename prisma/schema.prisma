@@ -85,7 +85,10 @@ model Site {
   user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId        String?
   title         String?
-  buttonLink          String?
+  buttonLink    String?
+  tokenId       String?
+  contract      String?
+  chainId       String?
 
   @@index([userId])
 }

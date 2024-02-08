@@ -26,6 +26,14 @@ export const truncate = (str: string, num: number) => {
   return str.slice(0, num) + "...";
 };
 
+export const truncateToken = (token: string, num: number) => {
+  if (!token) return "";
+  if (token.length <= num) {
+    return token;
+  }
+  return token.slice(0, num) + "..." + token.slice(-num);
+};
+
 export const getBlurDataURL = async (url: string | null) => {
   if (!url) {
     return "data:image/webp;base64,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";

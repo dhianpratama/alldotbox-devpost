@@ -29,8 +29,12 @@ export const createSite = async (formData: FormData) => {
     };
   }
   const name = formData.get("name") as string;
-  const description = ""; // formData.get("description") as string;
+  const description = formData.get("description") as string;
   const subdomain = formData.get("subdomain") as string;
+  const tokenId = formData.get("tokenId") as string;
+  const contract = formData.get("contract") as string;
+  const chainId = formData.get("chainId") as string;
+  const customDomain = formData.get("customDomain") as string;
 
   try {
     const response = await prisma.site.create({
@@ -38,6 +42,10 @@ export const createSite = async (formData: FormData) => {
         name,
         description,
         subdomain,
+        tokenId,
+        contract,
+        chainId,
+        customDomain,
         user: {
           connect: {
             id: session.user.id,
