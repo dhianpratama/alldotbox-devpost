@@ -91,7 +91,9 @@ export default async function SiteHomePage({
         <footer className="absolute bottom-0 left-0 w-screen">
           <div className="container mx-auto flex items-center justify-end px-6 py-8">
             <a
-              href="d"
+              href="https://alldotbox.com/"
+              rel="noreferrer"
+              target="_blank"
               className="mr-32 text-white transition-colors duration-300 hover:text-blue-50"
             >
               made with all.box
