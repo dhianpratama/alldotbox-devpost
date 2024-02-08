@@ -10,19 +10,22 @@ import { useModal } from "./provider";
 import va from "@vercel/analytics";
 import { useEffect, useState } from "react";
 import { getUserDomains } from "@/lib/reservoir";
+import { useSession } from "next-auth/react";
 
 export default function CreateSiteModal() {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const modal = useModal();
   const [data, setData] = useState({
     name: "",
     subdomain: "",
   });
-  const [userDomains, setUserDomains] = useState<any[]>([])
+  const [userDomains, setUserDomains] = useState<any[]>([]);
+
 
   useEffect(() => {
     getUserDomains(
-      "0x22739F9bbc10cf6412a67a3f135cD89E3e9E35F7",
+      session?.user?.address,
       "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
     ).then(({ tokens }) => {
       setUserDomains(tokens);
@@ -55,7 +58,7 @@ export default function CreateSiteModal() {
           }
         })
       }
-      className="w-full rounded-md bg-white md:max-w-md md:border md:border-stone-200 md:shadow dark:bg-black dark:md:border-stone-700"
+      className="w-full rounded-md bg-white dark:bg-black md:max-w-md md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
         <h2 className="font-cal text-2xl dark:text-white">Create a new site</h2>
@@ -81,10 +84,12 @@ export default function CreateSiteModal() {
             required
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           >
-            <option value="" disabled selected>My Awesome Box domain name</option>
-            {userDomains.map((option, index) => (
+            <option value="" disabled selected>
+              My Awesome Box domain name
+            </option>
+            {userDomains?.map((option, index) => (
               <option key={index} value={option?.token?.name}>
-                {option?.token?.name}
+                {option?.token?.name || option?.token?.tokenId}
               </option>
             ))}
           </select>
@@ -110,7 +115,7 @@ export default function CreateSiteModal() {
           />
         </div> */}
 
-        {/* <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2">
           <label
             htmlFor="subdomain"
             className="text-sm font-medium text-stone-500"
@@ -134,7 +139,7 @@ export default function CreateSiteModal() {
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* <div className="flex flex-col space-y-2">
           <label
@@ -154,7 +159,7 @@ export default function CreateSiteModal() {
           />
         </div> */}
       </div>
-      <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 md:px-10 dark:border-stone-700 dark:bg-stone-800">
+      <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
         <CreateSiteFormButton />
       </div>
     </form>

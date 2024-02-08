@@ -62,7 +62,8 @@ export const authOptions: NextAuthOptions = {
               });
             }
             return {
-              id: siwe.address,
+              // id: siwe.address,
+              id: user.id,
             };
           }
           return null;
@@ -78,7 +79,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login", // Error code passed in query string as ?error=
   },
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt", maxAge: 3000 },
+  session: { strategy: "jwt", maxAge: 24 * 60 * 60 },
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
@@ -96,16 +97,23 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token }: { session: any; token: any }) {
-      session.user.address = token.sub;
+
+      const user = await prisma.user.findFirst({
+        select: {
+          id: true,
+          address: true,
+        },
+        where: {
+          id: token.sub,
+        },
+      });
+
+      session.user.id = token.sub;
+      session.user.userId = token.sub;
+      session.user.address = user?.address;
+
       return session;
     },
-    // session: ({ session, token }) => ({
-    //   ...session,
-    //   user: {
-    //     ...session.user,
-    //     id: token.sub,
-    //   },
-    // }),
   },
 };
 

@@ -1,9 +1,9 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import {  Site } from "@prisma/client";
+import { Site } from "@prisma/client";
 import { revalidateTag } from "next/cache";
-import {  withSiteAuth } from "./auth";
+import { withSiteAuth } from "./auth";
 import { getSession } from "@/lib/auth";
 import {
   addDomainToVercel,
@@ -23,14 +23,14 @@ const nanoid = customAlphabet(
 
 export const createSite = async (formData: FormData) => {
   const session = await getSession();
-  if (!session?.user.id) {
+  if (!session?.user.address) {
     return {
       error: "Not authenticated",
     };
   }
   const name = formData.get("name") as string;
-  const description = "";// formData.get("description") as string;
-  const subdomain = name ;//formData.get("subdomain") as string;
+  const description = ""; // formData.get("description") as string;
+  const subdomain = formData.get("subdomain") as string;
 
   try {
     const response = await prisma.site.create({
