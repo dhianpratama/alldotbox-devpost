@@ -34,7 +34,7 @@ export default async function Sites({ limit }: { limit?: number }) {
 
   const ownerTokens = await Promise.all(
     tokens?.map(async ({ token }: { token: any }) => {
-      const dbSite = sites.find((s) => s.tokenId === token.tokenId);
+      const dbSite = sites.find((s:any) => s.tokenId === token.tokenId);
 
       if (!token.name) {
         const onChainDNSData = await get3DnsDomainInfo(
