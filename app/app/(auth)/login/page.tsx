@@ -27,7 +27,7 @@ export default function LoginPage() {
           rel="noreferrer"
           target="_blank"
         >
-          Learn More.
+          Learn More
         </a>
       </p>
 

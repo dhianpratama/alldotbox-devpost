@@ -3,21 +3,60 @@ import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
 
+import { Metadata, ResolvingMetadata } from "next";
+
+const collectionId = "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17";
+const tokenID =
+  "70296981572109517939404015929496700813276711764729391364588106005347322748339";
+
+const buttonTextColor = "#FFFFFF";
+const buttonColor = "#dc2751";
+const title = "Cyber.Box";
+const subTitle =
+  "This is a Web2 + Web3 domain name, and the domain name is on sale.";
+const ogImage = "/og-image.png";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  // // read route params
+  // const id = params.id
+
+  // // fetch data
+  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+
+  // // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+
+  // return {
+  //   title: product.title,
+  //   openGraph: {
+  //     images: ['/some-specific-page-image.jpg', ...previousImages],
+  //   },
+  // }
+
+  return {
+    title: title,
+    description: subTitle,
+    openGraph: {
+      title: title,
+      description: subTitle,
+      images: [ogImage],
+    },
+  };
+}
+
 export default async function SiteHomePage({
   params,
 }: {
   params: { domain: string };
 }) {
-  const collectionId = "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17";
-  const tokenID =
-    "70296981572109517939404015929496700813276711764729391364588106005347322748339";
-
-  const buttonTextColor = "#FFFFFF";
-  const buttonColor = "#dc2751";
-  const title = "Cyber.Box";
-  const subTitle =
-    "This is a Web2 + Web3 domain name, and the domain name is on sale.";
-
   return (
     <>
       <div className="body-prevent-scrolling font-hind bg-gray-900 text-base font-normal leading-7 text-gray-300">
