@@ -7,7 +7,8 @@ import { getUserDomains } from "@/lib/reservoir";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
-
+  console.log(session);
+  
   if (!session) {
     redirect("/login");
   }
@@ -29,7 +30,7 @@ export default async function Sites({ limit }: { limit?: number }) {
     ...(limit ? { take: limit } : {}),
   });
 
-  const ownerTokens = tokens.map(({ token }: { token: any }) => {
+  const ownerTokens = tokens?.map(({ token }: { token: any }) => {
     const dbSite = sites.find((s) => s.tokenId === token.tokenId);
     return { ...dbSite, isLive: !!dbSite, token };
   });
@@ -37,7 +38,7 @@ export default async function Sites({ limit }: { limit?: number }) {
   return ownerTokens?.length > 0 ? (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {ownerTokens.map((site: any) => (
+        {ownerTokens?.map((site: any) => (
           <DomainCard key={site.tokenId} data={site} />
         ))}
       </div>
