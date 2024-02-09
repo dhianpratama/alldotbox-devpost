@@ -3,41 +3,39 @@ import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
 
-export async function generateStaticParams() {
-  const allSites = await prisma.site.findMany({
-    select: {
-      subdomain: true,
-      customDomain: true,
-    },
-    // feel free to remove this filter if you want to generate paths for all sites
-    where: {
-      subdomain: "demo",
-    },
-  });
-  const allPaths = allSites
-    .flatMap(({ subdomain, customDomain }) => [
-      subdomain && {
-        domain: `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
-      },
-      customDomain && {
-        domain: customDomain,
-      },
-    ])
-    .filter(Boolean);
+// export async function generateStaticParams() {
+//   const allSites = await prisma.site.findMany({
+//     select: {
+//       subdomain: true,
+//       customDomain: true,
+//     },
+//     // feel free to remove this filter if you want to generate paths for all sites
+//     where: {
+//       subdomain: "demo",
+//     },
+//   });
+//   const allPaths = allSites
+//     .flatMap(({ subdomain:any, customDomain }) => [
+//       subdomain && {
+//         domain: `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+//       },
+//       customDomain && {
+//         domain: customDomain,
+//       },
+//     ])
+//     .filter(Boolean);
 
-  return allPaths;
-}
+//   return allPaths;
+// }
 
 export default async function SiteHomePage({
   params,
 }: {
   params: { domain: string };
 }) {
-
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
-  console.log("SiteHomePage<>>>>>>>>>>> ,,, ",data)
-
+  console.log("SiteHomePage<>>>>>>>>>>> ,,, ", data);
 
   if (!data) {
     notFound();
@@ -64,10 +62,10 @@ export default async function SiteHomePage({
         <div className="content-container  space-y-8">
           {/* <!-- Your Title, Subtitle, and Button --> */}
           <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl">
-            Cyber.Box
+            {data.name}
           </h1>
           <p className="text-lg text-white  sm:text-xl  md:text-2xl lg:text-3xl">
-            This is a Web2 + Web3 domain name, and the domain name is on sale.
+            {data.description}
           </p>
           <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
             <a
