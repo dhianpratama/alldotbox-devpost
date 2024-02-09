@@ -33,8 +33,11 @@ export default async function SiteHomePage({
 }: {
   params: { domain: string };
 }) {
+
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
+  console.log("SiteHomePage<>>>>>>>>>>> ,,, ",data)
+
 
   if (!data) {
     notFound();

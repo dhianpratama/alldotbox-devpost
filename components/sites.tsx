@@ -4,11 +4,14 @@ import prisma from "@/lib/prisma";
 import DomainCard from "./domain-card";
 import Image from "next/image";
 import { getUserDomains } from "@/lib/reservoir";
+import { uint256Tobytes32 } from "@/lib/web3";
+import { get3DnsDomainInfo } from "@/lib/3dns";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
+  console.log(session);
 
-  if (!session) {
+  if (!session?.user?.address) {
     redirect("/login");
   }
 
@@ -29,15 +32,37 @@ export default async function Sites({ limit }: { limit?: number }) {
     ...(limit ? { take: limit } : {}),
   });
 
-  const ownerTokens = tokens.map(({ token }: { token: any }) => {
-    const dbSite = sites.find((s) => s.tokenId === token.tokenId);
-    return { ...dbSite, isLive: !!dbSite, token };
-  });
+  const ownerTokens = await Promise.all(
+    tokens?.map(async ({ token }: { token: any }) => {
+      const dbSite = sites.find((s) => s.tokenId === token.tokenId);
+
+      if (!token.name) {
+        const onChainDNSData = await get3DnsDomainInfo(
+          uint256Tobytes32(token.tokenId),
+        );
+        token.name = onChainDNSData.domainName
+          ? onChainDNSData.domainName.replace(/\.+$/, "")
+          : null;
+      }
+
+      return {
+        ...dbSite,
+        isLive: !!dbSite,
+        token: {
+          name: token.name,
+          chainId: token.chainId,
+          contract: token.contract,
+          tokenId: token.tokenId,
+          image: token.image,
+        },
+      };
+    }),
+  );
 
   return ownerTokens?.length > 0 ? (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {ownerTokens.map((site: any) => (
+        {ownerTokens?.map((site: any) => (
           <DomainCard key={site.tokenId} data={site} />
         ))}
       </div>
