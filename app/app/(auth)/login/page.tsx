@@ -7,13 +7,15 @@ import { Suspense } from "react";
 export default function LoginPage() {
   return (
     <div className="mx-5 border border-stone-200 bg-white py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
-      <Image
-        alt="Platforms Starter Kit"
-        width={100}
-        height={100}
-        className="relative mx-auto h-12 w-auto rounded-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
-        src="/nm_logo_400x400.jpg"
-      />
+      <a href="https://www.namemaxi.com" rel="noreferrer" target="_blank">
+        <Image
+          alt="Platforms Starter Kit"
+          width={100}
+          height={100}
+          className="relative mx-auto h-12 w-auto rounded-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+          src="/nm_logo_400x400.jpg"
+        />
+      </a>
       <h1 className="mt-6 text-center font-cal text-3xl dark:text-white">
         All.box
       </h1>
@@ -25,7 +27,7 @@ export default function LoginPage() {
           rel="noreferrer"
           target="_blank"
         >
-          Learn more.
+          Learn More
         </a>
       </p>
 
