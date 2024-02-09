@@ -36,7 +36,7 @@ export default async function SiteHomePage({
 
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
-  console.log("SiteHomePage <>>>>>>>>>>> ,,, ",data)
+  console.log("SiteHomePage<>>>>>>>>>>> ,,, ",data)
 
 
   if (!data) {

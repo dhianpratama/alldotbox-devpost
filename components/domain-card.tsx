@@ -96,7 +96,7 @@ export default function DomainCard({ data }: { data: any }) {
                       0,
                       6,
                     )}${data?.token?.tokenId.slice(-6)}`,
-                description: data.token.description || "",
+                description: data.token?.description || "",
                 tokenId: data?.token?.tokenId,
                 contract: data?.token?.contract,
                 chainId: data?.token?.chainId,
