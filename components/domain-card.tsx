@@ -11,6 +11,7 @@ import LoadingDots from "@/components/icons/loading-dots";
 import { useState } from "react";
 import CreateSiteButton from "./create-site-button";
 import CreateSiteModalV2 from "./modal/create-site-v2";
+import PopoverMenu from "./popover-menu";
 
 export default function DomainCard({ data }: { data: any }) {
   const router = useRouter();
@@ -32,10 +33,10 @@ export default function DomainCard({ data }: { data: any }) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
   return (
     <div className="relative rounded-lg border border-stone-200 pb-5 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">
-      <Link
+      {/* <Link
         href={`/site/${data.id}/settings`}
         className="flex flex-col overflow-hidden rounded-lg"
-      >
+      > */}
       <BlurImage
         alt={data?.token?.name ?? "Card thumbnail"}
         width={500}
@@ -46,16 +47,34 @@ export default function DomainCard({ data }: { data: any }) {
         blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
       />
       <div className="border-t border-stone-200 p-4 dark:border-stone-700">
-        <h3 className="my-0 truncate font-cal text-xl font-bold tracking-wide dark:text-white">
-          {data?.token?.name || truncateToken(data?.token?.tokenId, 6)}
-        </h3>
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="my-0 truncate font-cal text-xl font-bold tracking-wide dark:text-white">
+            {data?.token?.name || truncateToken(data?.token?.tokenId, 6)}
+          </h3>
+          {data.isLive && (
+              <PopoverMenu>
+                 <Link
+                href="#"
+                className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-stone-600 dark:hover:text-white"
+              >
+                Edit
+              </Link>
+              <Link
+                href="#"
+                className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-stone-600 dark:hover:text-white"
+              >
+                UnPublish
+              </Link>
+                </PopoverMenu>
+          )}
+        </div>
         <p className="mt-2 line-clamp-1 text-sm font-normal leading-snug text-stone-500 dark:text-stone-400">
           {data.description}
         </p>
       </div>
       {/* </Link> */}
       {data.isLive ? (
-        <div className="bottom-4 flex w-full justify-between space-x-4 px-4">
+        <div className="bottom-4 flex w-full items-center justify-between gap-2 px-4 lg:gap-4">
           <a
             href={
               process.env.NEXT_PUBLIC_VERCEL_ENV
@@ -70,7 +89,7 @@ export default function DomainCard({ data }: { data: any }) {
           </a>
 
           <span className="flex items-center rounded-md bg-green-100 px-2 py-1 text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
-            <p>● Live</p>
+            <p className="w-10">● Live</p>
           </span>
         </div>
       ) : (
@@ -106,7 +125,7 @@ export default function DomainCard({ data }: { data: any }) {
           </CreateSiteButton>
         </div>
       )}
-      </Link>
+      {/* </Link> */}
     </div>
   );
 }
