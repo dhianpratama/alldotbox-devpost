@@ -32,16 +32,16 @@ export default function DomainCard({ data }: { data: any }) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
   return (
     <div className="relative rounded-lg border border-stone-200 pb-5 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">
-      {/* <Link
-        href={`/site/${data.id}`}
+      <Link
+        href={`/site/${data.id}/settings`}
         className="flex flex-col overflow-hidden rounded-lg"
-      > */}
+      >
       <BlurImage
         alt={data?.token?.name ?? "Card thumbnail"}
         width={500}
         height={500}
         className="h-44 object-cover"
-        src={data?.token?.image ?? "/placeholder.png"}
+        src={data?.image ?? "/placeholder.png"}
         placeholder="blur"
         blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
       />
@@ -106,7 +106,7 @@ export default function DomainCard({ data }: { data: any }) {
           </CreateSiteButton>
         </div>
       )}
-      {/* </Link> */}
+      </Link>
     </div>
   );
 }

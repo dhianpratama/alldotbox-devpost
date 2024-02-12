@@ -25,7 +25,7 @@ export default async function SiteHomePage({
         <div className="bg-container">
           <img
             className="bg-image"
-            src="/slider_1.jpg"
+            src={data?.image || "/slider_1.jpg"}
             alt="Background Image"
           />
         </div>
