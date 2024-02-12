@@ -25,7 +25,7 @@ export default function PopoverMenu({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className=" relative inline-block text-left" ref={dropdownRef}>
+      <div className="relative inline-block text-left" ref={dropdownRef}>
         <button
           onClick={ ()=>toggleMenu()}
           type="button"
@@ -35,7 +35,7 @@ export default function PopoverMenu({ children }: { children: ReactNode }) {
         </button>
 
         {isOpen &&(
-          <div className="z-10 absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white text-stone-600 shadow-lg ring-1 ring-black  ring-opacity-5 hover:bg-stone-200 dark:divide-stone-600 dark:bg-stone-800 dark:text-stone-400  dark:hover:bg-stone-700">
+          <div className="z-10 absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white text-stone-600 shadow-lg ring-1 ring-black  ring-opacity-5 hover:bg-gray-100 dark:divide-stone-600 dark:bg-stone-800 dark:text-stone-400  dark:hover:bg-stone-700">
             <div
               className="py-1"
               role="menu"

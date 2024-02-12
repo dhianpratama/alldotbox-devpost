@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
-import DeleteSiteForm from "@/components/form/delete-site-form";
+import DeleteSiteForm from "@/components/modal/delete-site";
 
 export default async function SiteSettingsIndex({
   params,
@@ -16,20 +16,6 @@ export default async function SiteSettingsIndex({
 
   return (
     <div className="flex flex-col space-y-6">
-      {/* <Form
-        title="Name"
-        description="The name of your site. This will be used as the meta title on Google as well."
-        helpText="Please use 32 characters maximum."
-        inputAttrs={{
-          name: "name",
-          type: "text",
-          defaultValue: data?.name!,
-          placeholder: "My Awesome Site",
-          maxLength: 32,
-          disabled:true
-        }}
-        handleSubmit={updateSite}
-      /> */}
 
       <Form
         title="Description"
