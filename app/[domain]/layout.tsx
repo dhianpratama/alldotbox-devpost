@@ -14,43 +14,53 @@ export async function generateMetadata({
   if (!data) {
     return null;
   }
+
   const {
-    name: title,
+    name,
     description,
     image,
-    logo,
   } = data as {
     name: string;
     description: string;
     image: string;
-    logo: string;
   };
 
   return {
-    title,
+    title:name,
     description,
     openGraph: {
-      title,
+      title:name,
       description,
       images: [image],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-      creator: "@vercel",
-    },
-    icons: [logo],
-    metadataBase: new URL(`https://${domain}`),
-    // Optional: Set canonical URL to custom domain if it exists
-    // ...(params.domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
-    //   data.customDomain && {
-    //     alternates: {
-    //       canonical: `https://${data.customDomain}`,
-    //     },
-    //   }),
-  };
+    }
+  }
+  
+
+  // return {
+  //   title,
+  //   description,
+  //   openGraph: {
+  //     title,
+  //     description,
+  //     images: [image],
+  //   },
+  //   twitter: {
+  //     card: "summary_large_image",
+  //     title,
+  //     description,
+  //     images: [image],
+  //     creator: "@vercel",
+  //   },
+  //   icons: [logo],
+  //   metadataBase: new URL(`https://${domain}`),
+  //   // Optional: Set canonical URL to custom domain if it exists
+  //   ...(params.domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
+  //     data.customDomain && {
+  //       alternates: {
+  //         canonical: `https://${data.customDomain}`,
+  //       },
+  //     }),
+  // };
 }
 
 export default async function SiteLayout({
@@ -79,13 +89,6 @@ export default async function SiteLayout({
   return (
     <div className={fontMapper[data.font]}>
       <div className="mt-20">{children}</div>
-
-      {/* {domain == `demo.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` ||
-      domain == `platformize.co` ? (
-        <CTA />
-      ) : (
-        <ReportAbuse />
-      )} */}
     </div>
   );
 }
