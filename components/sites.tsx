@@ -9,7 +9,6 @@ import { get3DnsDomainInfo } from "@/lib/3dns";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
-  console.log(session);
 
   if (!session?.user?.address) {
     redirect("/login");

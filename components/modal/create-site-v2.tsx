@@ -8,9 +8,7 @@ import { cn } from "@/lib/utils";
 import LoadingDots from "@/components/icons/loading-dots";
 import { useModal } from "./provider";
 import va from "@vercel/analytics";
-import { useEffect, useState } from "react";
-import { getUserDomains } from "@/lib/reservoir";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
 import { CreateSiteProps } from "@/lib/types";
 
 export default function CreateSiteModalV2({

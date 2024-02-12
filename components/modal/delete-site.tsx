@@ -7,10 +7,18 @@ import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { deleteSite } from "@/lib/actions";
 import va from "@vercel/analytics";
+import { useModal } from "./provider";
 
-export default function DeleteSiteForm({ siteName }: { siteName: string }) {
-  const { id } = useParams() as { id: string };
+export default function DeleteSiteForm({
+  siteName,
+  id,
+}: {
+  siteName: string;
+  id: string;
+}) {
+  // const { id } = useParams() as { id: string };
   const router = useRouter();
+  const modal = useModal();
   return (
     <form
       action={async (data: FormData) =>
@@ -22,7 +30,8 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
             } else {
               va.track("Deleted Site");
               router.refresh();
-              router.push("/sites");
+              modal?.hide();
+              // router.push("/sites");
               toast.success(`Successfully deleted site!`);
             }
           })
@@ -47,7 +56,7 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
         />
       </div>
 
-      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10">
+      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10 dark:border-stone-700 dark:bg-stone-800">
         <p className="text-center text-sm text-stone-500 dark:text-stone-400">
           This action is irreversible. Please proceed with caution.
         </p>
