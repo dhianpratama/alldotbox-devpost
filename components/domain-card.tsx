@@ -1,14 +1,8 @@
 "use client";
 
 import BlurImage from "@/components/blur-image";
-import { createSite } from "@/lib/actions";
 import { placeholderBlurhash, random, truncateToken } from "@/lib/utils";
-// import { BarChart, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import LoadingDots from "@/components/icons/loading-dots";
-import { useState } from "react";
 import CreateSiteButton from "./create-site-button";
 import CreateSiteModalV2 from "./modal/create-site-v2";
 import PopoverMenu from "./popover-menu";
@@ -37,7 +31,7 @@ export default function DomainCard({ data }: { data: any }) {
             <PopoverMenu>
               <Link
                 href={`/site/${data.id}/settings`}
-                className="block px-4 py-2 text-sm hover:bg-stone-200 dark:hover:bg-stone-600 dark:hover:text-white"
+                className="block px-4 py-2 text-sm font-semibold hover:bg-stone-200 dark:hover:bg-stone-600 dark:hover:text-white"
               >
                 Edit Site
               </Link>
