@@ -65,4 +65,5 @@ export interface CreateSiteProps {
   contract: string;
   chainId: string;
   customDomain: string;
+  title:string
 }

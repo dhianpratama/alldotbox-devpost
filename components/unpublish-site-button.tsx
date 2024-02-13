@@ -12,7 +12,7 @@ export default function UnpublishSiteButton({
   return (
     <button
       onClick={() => modal?.show(children)}
-      className="block px-4 py-2 text-sm hover:bg-stone-200 dark:hover:bg-stone-600 dark:hover:text-white"
+      className="w-full text-left block px-4 py-2 text-sm  font-semibold hover:bg-stone-200 dark:hover:bg-red-200 dark:hover:text-red-700"
     >
       Unpublish Site
     </button>
