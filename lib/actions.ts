@@ -194,11 +194,7 @@ export const updateSite = withSiteAuth(
           },
         });
       }
-      // console.log(
-      //   "Updated site data! Revalidating tags: ",
-      //   `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
-      //   `${site.customDomain}-metadata`,
-      // );
+      
       await revalidateTag(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
       );
