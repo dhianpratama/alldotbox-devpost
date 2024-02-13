@@ -87,6 +87,7 @@ export default function DomainCard({ data }: { data: any }) {
                 contract: data?.token?.contract,
                 chainId: data?.token?.chainId,
                 customDomain: data?.token?.name || "",
+                title: data?.title || "",
               }}
             />
           </CreateSiteButton>
