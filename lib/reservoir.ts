@@ -23,3 +23,22 @@ export const getUserDomains = async (
     return res.json();
   });
 };
+
+
+export const getTokenListing = async (
+  contract: string,
+  token: string,
+) => {
+  
+  const url = `${RESERVOIR_URL}/orders/asks/v5?token=${contract}:${token}`;
+  
+  return await fetch(
+    url,
+    {
+      method: "GET",
+      headers: myHeaders,
+    },
+  ).then((res) => {
+    return res.json();
+  });
+};

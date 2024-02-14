@@ -1,7 +1,7 @@
 export default function EthLogo({ dimensions }: { dimensions?: string }) {
   return (
     <svg
-      className="mr-4 w-6"
+      className="mr-2 w-4"
       width="35"
       height="58"
       xmlns="http://www.w3.org/2000/svg"

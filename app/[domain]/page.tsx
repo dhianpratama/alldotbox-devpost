@@ -1,33 +1,34 @@
 import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
+import { getTokenListing } from "@/lib/reservoir";
 
-const getListings = async ({
-  contract,
-  tokenId,
-  chainId,
-  protocol,
-}: {
-  contract: string | null;
-  tokenId: string | null;
-  chainId: string | null;
-  protocol: string | null;
-}) => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "x-api-key": "e8f3013899434a2a91568d87114a63c7",
-    },
-  };
+// const getListings = async ({
+//   contract,
+//   tokenId,
+//   chainId,
+//   protocol,
+// }: {
+//   contract: string | null;
+//   tokenId: string | null;
+//   chainId: string | null;
+//   protocol: string | null;
+// }) => {
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       accept: "application/json",
+//       "x-api-key": "e8f3013899434a2a91568d87114a63c7",
+//     },
+//   };
 
-  const listingsRes = await fetch(
-    `https://api.opensea.io//api/v2/orders/${chainId}/${protocol}/listings?asset_contract_address=${contract}&token_ids=${tokenId}`,
-    options,
-  );
+//   const listingsRes = await fetch(
+//     `https://api.opensea.io/api/v2/orders/${chainId}/${protocol}/listings?asset_contract_address=${contract}&token_ids=${tokenId}`,
+//     options,
+//   );
 
-  const listings = listingsRes.json();
-  return listings;
-};
+//   const listings = listingsRes.json();
+//   return listings;
+// };
 
 export default async function SiteHomePage({
   params,
@@ -41,16 +42,22 @@ export default async function SiteHomePage({
     notFound();
   }
 
-  const listings = await getListings({
-    chainId: data.chainId,
-    protocol: "seaport",
-    contract: data.contract,
-    tokenId: data.tokenId,
-  });
+  // const listings = await getListings({
+  //   chainId: data.chainId,
+  //   protocol: "seaport",
+  //   contract: data.contract,
+  //   tokenId: data.tokenId,
+  // });
+
+
+  const listings = await getTokenListing(
+    data.contract!,
+    data.tokenId!,
+  );
 
   const current_price =
     listings && listings.orders && listings.orders.length > 0
-      ? parseFloat(listings?.orders[0].current_price) / 1e18
+      ? listings?.orders[0].price.amount.decimal //+ " " + listings?.orders[0].price.currency.symbol
       : "";
 
   return (
