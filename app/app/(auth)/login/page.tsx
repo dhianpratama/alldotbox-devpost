@@ -8,10 +8,10 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col justify-center bg-black py-12 sm:px-6 lg:px-8">
       <div className="mx-5 border-2 border-gray-400 bg-white py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
         <Image
-          alt="Platforms Starter Kit"
+          alt="All.box Logo"
           width={100}
           height={100}
-          className="relative mx-auto h-12 w-auto rounded-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+          className="relative mx-auto h-12 w-auto dark:scale-110 dark:border dark:border-stone-400"
           src="/logo.png"
         />
         <h1 className="mt-6 text-center font-cal text-3xl dark:text-black">
