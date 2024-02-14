@@ -15,26 +15,18 @@ export async function generateMetadata({
     return null;
   }
 
-  const {
-    name,
-    description,
-    image,
-  } = data as {
-    name: string;
-    description: string;
-    image: string;
-  };
-
   return {
-    title:name,
-    description,
+    metadataBase: new URL(`https://${domain}`),
+    title: "All.box (Build For Sale Landing Pages)",
+    description:
+      "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
     openGraph: {
-      title:name,
-      description,
-      images: [image],
-    }
-  }
-  
+      title: "All.box (Build For Sale Landing Pages)",
+      description:
+        "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
+      images: ["/all-box.png"],
+    },
+  };
 
   // return {
   //   title,
