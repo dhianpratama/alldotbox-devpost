@@ -42,12 +42,14 @@ export async function generateMetadata(
   // }
 
   return {
-    title: title,
-    description: subTitle,
+    title: "All.box (Build For Sale Landing Pages)",
+    description:
+      "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
     openGraph: {
-      title: title,
-      description: subTitle,
-      images: [ogImage],
+      title: "All.box (Build For Sale Landing Pages)",
+      description:
+        "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
+      images: ["/all-box.png"],
     },
   };
 }
