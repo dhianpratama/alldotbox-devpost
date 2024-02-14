@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Login | Platforms Starter Kit",
+  title: "Login | All.box ",
 };
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
