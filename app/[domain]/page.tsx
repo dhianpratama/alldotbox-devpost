@@ -28,21 +28,6 @@ const getListings = async ({
   const listings = listingsRes.json();
   return listings;
 };
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    "x-api-key": "e8f3013899434a2a91568d87114a63c7",
-  },
-};
-
-fetch(
-  "https://api.opensea.io//api/v2/orders/arbitrum/seaport/listings?asset_contract_address=contract_address&token_ids=token_id",
-  options,
-)
-  .then((response) => response.json())
-  .then((response) => console.log(response))
-  .catch((err) => console.error(err));
 
 export default async function SiteHomePage({
   params,
