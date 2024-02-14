@@ -73,10 +73,10 @@ model Site {
   id              String   @id @default(cuid())
   name            String?
   description     String?  @db.Text
-  logo            String?  @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png") @db.Text
+  logo            String?  @default("https://hj8ykf3o8klhiqnj.public.blob.vercel-storage.com/0Sb805x-QEVB3VzsQQO5fiPdMBl4MNAi7wAs3n.png") @db.Text
   font            String   @default("font-cal")
-  image           String?  @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/hxfcV5V-eInX3jbVUhjAt1suB7zB88uGd1j20b.png") @db.Text
-  imageBlurhash   String?  @default("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAhCAYAAACbffiEAAAACXBIWXMAABYlAAAWJQFJUiTwAAABfUlEQVR4nN3XyZLDIAwE0Pz/v3q3r55JDlSBplsIEI49h76k4opexCK/juP4eXjOT149f2Tf9ySPgcjCc7kdpBTgDPKByKK2bTPFEdMO0RDrusJ0wLRBGCIuelmWJAjkgPGDSIQEMBDCfA2CEPM80+Qwl0JkNxBimiaYGOTUlXYI60YoehzHJDEm7kxjV3whOQTD3AaCuhGKHoYhyb+CBMwjIAFz647kTqyapdV4enGINuDJMSScPmijSwjCaHeLcT77C7EC0C1ugaCTi2HYfAZANgj6Z9A8xY5eiYghDMNQBJNCWhASot0jGsSCUiHWZcSGQjaWWCDaGMOWnsCcn2QhVkRuxqqNxMSdUSElCDbp1hbNOsa6Ugxh7xXauF4DyM1m5BLtCylBXgaxvPXVwEoOBjeIFVODtW74oj1yBQah3E8tyz3SkpolKS9Geo9YMD1QJR1Go4oJkgO1pgbNZq0AOUPChyjvh7vlXaQa+X1UXwKxgHokB2XPxbX+AnijwIU4ahazAAAAAElFTkSuQmCC") @db.Text
+  image           String?  @default("https://hj8ykf3o8klhiqnj.public.blob.vercel-storage.com/cYeMtcp-f3InzsfSFHJTyVEyhbNoLNMJGgVA7A.jpeg") @db.Text
+  imageBlurhash   String?  @default("data:image/png;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAhADIDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAYDBQECBAf/xAApEAACAQMCBAUFAAAAAAAAAAAAAQIDBREEMRIUITIVIjNCUTRBYWJx/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A8BdE0dEsXTIpJI0w4Xp/wRzo4LDKIazWAK6Swatm9bfoQvJFZyBjDAKb6lBpbFbqswyPmpteIPyitd9HwZ6Fc5S3Ks8mY8UyWnpXOrjAwW+zucU+ENaXOXk/sY5V/A6ysriu0552rHtCaUuWfwA1eGfqANegazsYl333AAZhf0n1C/o72f00AEWrGvscFXcAKyhAAA//2Q==") @db.Text
   subdomain       String?  @unique
   customDomain    String?  @unique
   message404      String?  @default("Blimey! You've found a page that doesn't exist.") @db.Text

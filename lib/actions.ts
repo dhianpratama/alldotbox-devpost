@@ -35,6 +35,7 @@ export const createSite = async (formData: FormData) => {
   const contract = formData.get("contract") as string;
   const chainId = formData.get("chainId") as string;
   const customDomain = formData.get("customDomain") as string;
+  const title = formData.get("title") as string;
 
   try {
     const response = await prisma.site.create({
@@ -46,6 +47,7 @@ export const createSite = async (formData: FormData) => {
         contract,
         chainId,
         customDomain,
+        title,
         user: {
           connect: {
             id: session.user.id,
@@ -53,6 +55,14 @@ export const createSite = async (formData: FormData) => {
         },
       },
     });
+
+    if (customDomain && validDomainRegex.test(customDomain)) {
+      await Promise.all([
+        addDomainToVercel(customDomain),
+        // Optional: add www subdomain as well and redirect to apex domain
+        // addDomainToVercel(`www.${value}`),
+      ]);
+    }
     await revalidateTag(
       `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
     );
@@ -184,11 +194,7 @@ export const updateSite = withSiteAuth(
           },
         });
       }
-      // console.log(
-      //   "Updated site data! Revalidating tags: ",
-      //   `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
-      //   `${site.customDomain}-metadata`,
-      // );
+      
       await revalidateTag(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
       );
@@ -222,6 +228,9 @@ export const deleteSite = withSiteAuth(async (_: FormData, site: Site) => {
     );
     response.customDomain &&
       (await revalidateTag(`${site.customDomain}-metadata`));
+
+    response.customDomain &&
+      (await removeDomainFromVercelProject(response.customDomain));
     return response;
   } catch (error: any) {
     return {

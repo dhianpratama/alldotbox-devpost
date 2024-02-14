@@ -1,5 +1,34 @@
 import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
+import { getTokenListing } from "@/lib/reservoir";
+
+// const getListings = async ({
+//   contract,
+//   tokenId,
+//   chainId,
+//   protocol,
+// }: {
+//   contract: string | null;
+//   tokenId: string | null;
+//   chainId: string | null;
+//   protocol: string | null;
+// }) => {
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       accept: "application/json",
+//       "x-api-key": "e8f3013899434a2a91568d87114a63c7",
+//     },
+//   };
+
+//   const listingsRes = await fetch(
+//     `https://api.opensea.io/api/v2/orders/${chainId}/${protocol}/listings?asset_contract_address=${contract}&token_ids=${tokenId}`,
+//     options,
+//   );
+
+//   const listings = listingsRes.json();
+//   return listings;
+// };
 
 export default async function SiteHomePage({
   params,
@@ -8,10 +37,28 @@ export default async function SiteHomePage({
 }) {
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
-
+  const buttonColor = data?.buttonColor || "#dc2751";
   if (!data) {
     notFound();
   }
+
+  // const listings = await getListings({
+  //   chainId: data.chainId,
+  //   protocol: "seaport",
+  //   contract: data.contract,
+  //   tokenId: data.tokenId,
+  // });
+
+
+  const listings = await getTokenListing(
+    data.contract!,
+    data.tokenId!,
+  );
+
+  const current_price =
+    listings && listings.orders && listings.orders.length > 0
+      ? listings?.orders[0].price.amount.decimal //+ " " + listings?.orders[0].price.currency.symbol
+      : "";
 
   return (
     <>
@@ -34,33 +81,35 @@ export default async function SiteHomePage({
         <div className="content-container  space-y-8">
           {/* <!-- Your Title, Subtitle, and Button --> */}
           <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl">
-            {data?.name}
+            {data?.title}
           </h1>
           <p className="text-lg text-white sm:text-xl  md:px-4  md:text-2xl lg:text-3xl">
             {data?.description}
           </p>
           <div className="flex flex-col items-center justify-center gap-x-4 gap-y-6 md:flex-row md:px-16">
-            {data?.twitter && <a
-              style={{
-                backgroundColor: data?.buttonColor || "#dc2751",
-                borderColor: data?.buttonColor || "#dc2751",
-                color: data?.buttonTextColor || "#FFFFFF",
-              }}
-              href={`https://twitter.com/${data?.twitter}`}
-              target="_blank"
-              className="verflow-hidden relative flex w-full items-center justify-center rounded-full border   px-4 py-2  shadow-lg transition-all  hover:shadow-white/50  md:px-5 md:py-2 lg:max-w-40 lg:px-6 lg:py-3"
-            >
-              <span className="relative z-10 font-bold  md:text-lg lg:text-xl ">
-                Contact
-              </span>
-            </a>}
+            {data?.twitter && (
+              <a
+                style={{
+                  backgroundColor: data?.buttonColor || "#dc2751",
+                  borderColor: data?.buttonColor || "#dc2751",
+                  color: data?.buttonTextColor || "#FFFFFF",
+                }}
+                href={`https://twitter.com/${data?.twitter}`}
+                target="_blank"
+                className="verflow-hidden relative flex w-full items-center justify-center rounded-full border   px-4 py-2  shadow-lg transition-all  hover:shadow-white/50  md:px-5 md:py-2 lg:max-w-40 lg:px-6 lg:py-3"
+              >
+                <span className="relative z-10 font-bold  md:text-lg lg:text-xl ">
+                  Contact
+                </span>
+              </a>
+            )}
             <a
               href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
               target="_blank"
-              className="verflow-hidden relative flex w-full items-center justify-center rounded-full border border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0 before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0 after:h-full after:w-0 after:rounded-r-full after:duration-500 hover:border-pink-400 hover:text-pink-400 hover:shadow-pink-400/50   hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-40 lg:px-6 lg:py-3"
+              className={`overflow-hidden relative flex w-full items-center justify-center rounded-full border border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0 before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0 after:h-full after:w-0 after:rounded-r-full after:duration-500 hover:border-[${buttonColor}] hover:text-[${buttonColor}] hover:shadow-[${buttonColor}]  hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-40 lg:px-6 lg:py-3`}
             >
               <span className="relative z-10 font-bold  md:text-lg lg:text-xl ">
-                Buy
+                Buy {current_price}
               </span>
             </a>
           </div>

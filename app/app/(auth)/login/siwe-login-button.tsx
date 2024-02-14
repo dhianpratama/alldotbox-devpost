@@ -8,6 +8,7 @@ import { useAccount, useConnect, useSignMessage } from "wagmi";
 import { SiweMessage } from "siwe";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import { injected } from "wagmi/connectors";
+import EthLogo from "@/components/icons/eth";
 
 export default function SiweLoginButton() {
   const { signMessageAsync } = useSignMessage();
@@ -79,11 +80,13 @@ export default function SiweLoginButton() {
         <LoadingDots color="#A8A29E" />
       ) : (
         <>
-          <p className="text-sm font-medium text-stone-600 dark:text-stone-400">
+          <EthLogo />
+          <p className="text-sm font-medium text-white dark:text-stone">
             Sign in With Ethereum
           </p>
         </>
       )}
     </button>
+    
   );
 }

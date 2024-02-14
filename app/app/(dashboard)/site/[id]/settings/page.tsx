@@ -16,6 +16,19 @@ export default async function SiteSettingsIndex({
 
   return (
     <div className="flex flex-col space-y-6">
+      <Form
+        title="Title"
+        description="The title of your site contact button."
+        helpText="Include Title that you want to show on homepage."
+        inputAttrs={{
+          name: "title",
+          type: "text",
+          defaultValue: data?.title!,
+          placeholder: "Site Title",
+          maxLength: 32,
+        }}
+        handleSubmit={updateSite}
+      />
 
       <Form
         title="Description"
@@ -70,7 +83,7 @@ export default async function SiteSettingsIndex({
         handleSubmit={updateSite}
       />
 
-      <Form
+      {/* <Form
         title="Button Text Color"
         description="The twitter handle of your site contact button."
         helpText="Include twitter so the interested buyer can contact directly."
@@ -82,8 +95,7 @@ export default async function SiteSettingsIndex({
           maxLength: 32,
         }}
         handleSubmit={updateSite}
-      />
-
+      /> */}
     </div>
   );
 }
