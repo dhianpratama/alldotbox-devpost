@@ -3,13 +3,8 @@
 import Link from "next/link";
 import {
   ArrowLeft,
-  BarChart3,
-  Edit3,
-  Globe,
   LayoutDashboard,
   Menu,
-  Newspaper,
-  Settings,
 } from "lucide-react";
 import {
   useParams,

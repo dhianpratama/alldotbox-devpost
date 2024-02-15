@@ -73,9 +73,9 @@ model Site {
   id              String   @id @default(cuid())
   name            String?
   description     String?  @db.Text
-  logo            String?  @default("https://hj8ykf3o8klhiqnj.public.blob.vercel-storage.com/0Sb805x-QEVB3VzsQQO5fiPdMBl4MNAi7wAs3n.png") @db.Text
+  logo            String?  @default("https://7vg40ehl3esvubmf.public.blob.vercel-storage.com/D3RnSf9-C75jRXbDeylmtqO7EHvlVgFQts36Mv.png") @db.Text
   font            String   @default("font-cal")
-  image           String?  @default("https://hj8ykf3o8klhiqnj.public.blob.vercel-storage.com/cYeMtcp-f3InzsfSFHJTyVEyhbNoLNMJGgVA7A.jpeg") @db.Text
+  image           String?  @default("https://7vg40ehl3esvubmf.public.blob.vercel-storage.com/bdPqAON-AqfCMgJHW4WdiQwviCDe2MuF4LZFXU.jpeg") @db.Text
   imageBlurhash   String?  @default("data:image/png;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAhADIDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAYDBQECBAf/xAApEAACAQMCBAUFAAAAAAAAAAAAAQIDBREEMRIUITIVIjNCUTRBYWJx/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A8BdE0dEsXTIpJI0w4Xp/wRzo4LDKIazWAK6Swatm9bfoQvJFZyBjDAKb6lBpbFbqswyPmpteIPyitd9HwZ6Fc5S3Ks8mY8UyWnpXOrjAwW+zucU+ENaXOXk/sY5V/A6ysriu0552rHtCaUuWfwA1eGfqANegazsYl333AAZhf0n1C/o72f00AEWrGvscFXcAKyhAAA//2Q==") @db.Text
   subdomain       String?  @unique
   customDomain    String?  @unique

@@ -20,7 +20,7 @@ export default function LoginPage() {
           All.box
         </h1>
         <p className="mt-3 text-center text-stone-600 dark:text-stone-400">
-          Craft an unforgettable impression with your Brandable For Sale Page{" "}
+        Craft an unforgettable impression with your For Sale Page{" "}
         </p>
 
         <div className="mx-auto mt-4 w-11/12 max-w-xs sm:w-full">
@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
         <a
           className="mt-6 inline-block w-full text-center font-medium text-gray-600 hover:text-stone-800 dark:text-stone-300 dark:hover:text-stone-100"
-          href="https://blog.ensdom.com"
+          href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-domains"
           rel="noreferrer"
           target="_blank"
         >
