@@ -72,21 +72,20 @@ export default function SiweLoginButton() {
       }}
       className={`${
         loading
-          ? "cursor-not-allowed bg-stone-50 dark:bg-stone-800"
-          : "bg-white hover:bg-stone-50 active:bg-stone-100 dark:bg-black dark:hover:border-white dark:hover:bg-black"
-      } group my-2 flex h-10 w-full items-center justify-center space-x-2 rounded-md border border-stone-200 transition-colors duration-75 focus:outline-none dark:border-stone-700`}
+          ? "cursor-not-allowed bg-stone-50 dark:bg-stone-800 "
+          : "bg-black"
+      }   group my-2 flex h-10 w-full transform items-center justify-center space-x-2 rounded-md border-2 border-gray-600 transition-all duration-100 ease-in-out hover:scale-105 focus:outline-none dark:border-stone-700`}
     >
       {loading ? (
         <LoadingDots color="#A8A29E" />
       ) : (
         <>
           <EthLogo />
-          <p className="text-sm font-medium text-white dark:text-stone">
+          <p className="dark:text-stone text-sm font-medium text-white">
             Sign in With Ethereum
           </p>
         </>
       )}
     </button>
-    
   );
 }
