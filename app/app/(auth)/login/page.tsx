@@ -6,7 +6,7 @@ import { Suspense } from "react";
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col justify-center bg-black py-12 sm:px-6 lg:px-8">
-      <div className="mx-5 border-2 border-gray-400 bg-white py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
+      <div className="mx-5 border-2 border-gray-400 bg-white px-2 py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
         <Image
           alt="All.box Logo"
           width={100}
