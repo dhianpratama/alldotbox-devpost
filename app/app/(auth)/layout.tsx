@@ -3,7 +3,15 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Login | All.box ",
+  title: "All.box (Build For Sale Landing Pages)",
+  description:
+    "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
+  openGraph: {
+    title: "All.box (Build For Sale Landing Pages)",
+    description:
+      "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
+    images: ["/all-box.png"],
+  },
 };
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
