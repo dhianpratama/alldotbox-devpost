@@ -106,11 +106,6 @@ export default async function SiteHomePage({
             <a
               href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
               target="_blank"
-              style={{
-                backgroundColor: data?.buttonColor || "#dc2751",
-                borderColor: data?.buttonColor || "#dc2751",
-                color: data?.buttonTextColor || "#FFFFFF",
-              }}
               className={`overflow-hidden relative flex w-full items-center justify-center rounded-full border 
               border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0 
               before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0 
