@@ -18,8 +18,8 @@ export default async function SiteSettingsIndex({
     <div className="flex flex-col space-y-6">
       <Form
         title="Title"
-        description="The title of your site contact button."
-        helpText="Include Title that you want to show on homepage."
+        description="The main text for your site."
+        helpText=""
         inputAttrs={{
           name: "title",
           type: "text",
@@ -32,8 +32,8 @@ export default async function SiteSettingsIndex({
 
       <Form
         title="Description"
-        description="The description of your site. This will be used as the meta description on Google as well."
-        helpText="Include SEO-optimized keywords that you want to rank for."
+        description="The second line of your site."
+        helpText=""
         inputAttrs={{
           name: "description",
           type: "text",
@@ -44,6 +44,20 @@ export default async function SiteSettingsIndex({
       />
 
       <Form
+        title="Button Link"
+        description="Where you want users to contact you."
+        helpText="Contact button. Opens in new window when tapped"
+        inputAttrs={{
+          name: "buttonLink",
+          type: "text",
+          defaultValue: data?.buttonLink!,
+          placeholder: "https://twitter.com/myawesomeusername",
+          maxLength: 32,
+        }}
+        handleSubmit={updateSite}
+      />
+
+      {/* <Form
         title="Twitter"
         description="The twitter handle of your site contact button."
         helpText="Include twitter so the interested buyer can contact directly."
@@ -55,30 +69,30 @@ export default async function SiteSettingsIndex({
           maxLength: 32,
         }}
         handleSubmit={updateSite}
-      />
-
-      <Form
-        title="Background image"
-        description="The background image for your site. Accepted formats: .png, .jpg, .jpeg"
-        helpText="Max file size 50MB."
-        inputAttrs={{
-          name: "image",
-          type: "file",
-          defaultValue: data?.image!,
-        }}
-        handleSubmit={updateSite}
-      />
+      /> */}
 
       <Form
         title="Button Color"
-        description="The twitter handle of your site contact button."
-        helpText="Include twitter so the interested buyer can contact directly."
+        description="Color of Contact Button"
+        helpText="Also Color of Buy Button when hovered"
         inputAttrs={{
           name: "buttonColor",
           type: "color",
           defaultValue: data?.buttonColor!,
           placeholder: "Contact Button Color ",
           maxLength: 32,
+        }}
+        handleSubmit={updateSite}
+      />
+
+      <Form
+        title="Background image"
+        description="The background image for your site. Accepted formats: .png, .jpg, .jpeg"
+        helpText="Max file size 5MB."
+        inputAttrs={{
+          name: "image",
+          type: "file",
+          defaultValue: data?.image!,
         }}
         handleSubmit={updateSite}
       />
