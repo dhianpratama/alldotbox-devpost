@@ -8,6 +8,7 @@ import CreateSiteModalV2 from "./modal/create-site-v2";
 import PopoverMenu from "./popover-menu";
 import DeleteSiteForm from "./modal/delete-site";
 import UnpublishSiteButton from "./unpublish-site-button";
+import { InfoIcon } from "lucide-react";
 
 export default function DomainCard({ data }: { data: any }) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
@@ -53,19 +54,40 @@ export default function DomainCard({ data }: { data: any }) {
       {/* </Link> */}
       {data.isLive ? (
         <div className="bottom-4 flex w-full items-center justify-between gap-2 px-4 lg:gap-4">
-          <a
-            href={
-              process.env.NEXT_PUBLIC_VERCEL_ENV
-                ? `https://${url}`
-                : `http://${data.subdomain}.localhost:3000`
-            }
-            target="_blank"
-            rel="noreferrer"
-            className="truncate rounded-md bg-stone-100 px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
-          >
-            {url} ↗
-          </a>
-
+          <div className="flex w-full flex-col">
+            {data?.token?.name && (
+              <div className="flex space-x-1">
+                <a
+                  href={`https://${data?.token?.name}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="truncate rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+                >
+                  {data?.token?.name}
+                </a>
+                <a
+                    href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-domains"
+                    rel="noreferrer"
+                    target="_blank"
+                    className="text-stone-600"
+                  >
+                    <InfoIcon width={18} />
+                  </a>
+              </div>
+            )}
+            <a
+              href={
+                process.env.NEXT_PUBLIC_VERCEL_ENV
+                  ? `https://${url}`
+                  : `http://${data.subdomain}.localhost:3000`
+              }
+              target="_blank"
+              rel="noreferrer"
+              className="truncate rounded-md bg-stone-100 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+            >
+              {url} ↗
+            </a>
+          </div>
           <span className="flex items-center rounded-md bg-green-100 px-2 py-1 text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
             <p className="w-10">● Live</p>
           </span>

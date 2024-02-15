@@ -10,6 +10,8 @@ import { useModal } from "./provider";
 import va from "@vercel/analytics";
 import { useState } from "react";
 import { CreateSiteProps } from "@/lib/types";
+import { InfoIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function CreateSiteModalV2({
   siteData,
@@ -67,18 +69,28 @@ export default function CreateSiteModalV2({
             // onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
-            readOnly
+            readOnly={true}
+            disabled={true}
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
         <div className="flex flex-col space-y-2">
-          <label
-            htmlFor="subdomain"
-            className="text-sm font-medium text-stone-500"
-          >
-            Your Address will be
-          </label>
+          <div className="flex space-x-2 text-stone-500">
+            <label
+              htmlFor="subdomain"
+              className="text-sm font-medium text-stone-500"
+            >
+              Alias
+            </label>
+            <a
+              href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-domains"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <InfoIcon width={16} />
+            </a>
+          </div>
           <div className="flex w-full max-w-md">
             <input
               name="subdomain"
@@ -92,6 +104,7 @@ export default function CreateSiteModalV2({
               maxLength={32}
               required
               readOnly
+              disabled={true}
               className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
             <div className="flex items-center rounded-r-lg border border-l-0 border-stone-200 bg-stone-100 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
@@ -114,12 +127,13 @@ export default function CreateSiteModalV2({
               value={data.title}
               required
               maxLength={32}
-              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+              autoFocus
+              className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
           </div>
         </div>
 
-        <div className="flex flex-col space-y-2">
+        {/* <div className="flex flex-col space-y-2">
           <label
             htmlFor="description"
             className="text-sm font-medium text-stone-500"
@@ -136,7 +150,7 @@ export default function CreateSiteModalV2({
             required
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
-        </div>
+        </div> */}
         <input
           name="tokenId"
           type="hidden"
