@@ -15,44 +15,36 @@ export async function generateMetadata({
     return null;
   }
 
-  return {
-    metadataBase: new URL(`https://${domain}`),
-    title: "All.box (Build For Sale Landing Pages)",
-    description:
-      "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
-    openGraph: {
-      title: "All.box (Build For Sale Landing Pages)",
-      description:
-        "Build your For Sale Lander for your Tokenized Domains 3DNS. Box and NameFi",
-      images: ["/all-box.png"],
-    },
+  const {
+    name: title,
+    description,
+    image,
+    logo,
+  } = data as {
+    name: string;
+    description: string;
+    image: string;
+    logo: string;
   };
 
-  // return {
-  //   title,
-  //   description,
-  //   openGraph: {
-  //     title,
-  //     description,
-  //     images: [image],
-  //   },
-  //   twitter: {
-  //     card: "summary_large_image",
-  //     title,
-  //     description,
-  //     images: [image],
-  //     creator: "@vercel",
-  //   },
-  //   icons: [logo],
-  //   metadataBase: new URL(`https://${domain}`),
-  //   // Optional: Set canonical URL to custom domain if it exists
-  //   ...(params.domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
-  //     data.customDomain && {
-  //       alternates: {
-  //         canonical: `https://${data.customDomain}`,
-  //       },
-  //     }),
-  // };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+      creator: "@alldotbox",
+    },
+    icons: [logo],
+    metadataBase: new URL(`https://${domain}`),
+  };
 }
 
 export default async function SiteLayout({
