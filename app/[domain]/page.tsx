@@ -49,15 +49,13 @@ export default async function SiteHomePage({
   //   tokenId: data.tokenId,
   // });
 
-
-  const listings = await getTokenListing(
-    data.contract!,
-    data.tokenId!,
-  );
+  const listings = await getTokenListing(data.contract!, data.tokenId!);
 
   const current_price =
     listings && listings.orders && listings.orders.length > 0
-      ? listings?.orders[0].price.amount.decimal + " " + listings?.orders[0].price.currency.symbol
+      ? listings?.orders[0].price.amount.decimal +
+        " " +
+        listings?.orders[0].price.currency.symbol
       : "";
 
   return (
@@ -106,10 +104,12 @@ export default async function SiteHomePage({
             <a
               href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
               target="_blank"
-              className={`overflow-hidden relative flex w-full items-center justify-center rounded-full border 
+              className={`relative flex w-full items-center justify-center overflow-hidden rounded-full border 
               border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0 
               before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0 
-              after:h-full after:w-0 after:rounded-r-full after:duration-500 hover:border-[${buttonColor}] hover:text-[${buttonColor}] hover:shadow-[${buttonColor}]  hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-48 lg:px-6 lg:py-3`}
+              after:h-full after:w-0 after:rounded-r-full after:duration-500 
+              hover:border-[#dc2751] hover:text-[#dc2751] hover:shadow-[#dc2751]  
+              hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-48 lg:px-6 lg:py-3`}
             >
               <span className="relative z-10 font-bold  md:text-lg lg:text-xl ">
                 Buy {current_price}
