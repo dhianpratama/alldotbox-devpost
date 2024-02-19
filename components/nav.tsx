@@ -56,7 +56,7 @@ export default function Nav({ children }: { children: ReactNode }) {
         className={`fixed z-20 right-5 top-7 sm:hidden`}
         onClick={() => setShowSidebar(!showSidebar)}
       >
-        <Menu width={20} />
+        <Menu className=" text-black dark:text-white" width={20} />
       </button>
       <div
         className={`transform ${
@@ -65,7 +65,7 @@ export default function Nav({ children }: { children: ReactNode }) {
       >
         <div className="grid gap-2">
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
-            
+
             <Link
               href="/"
               className="rounded-lg p-2 hover:bg-stone-200 dark:hover:bg-stone-700"
