@@ -53,15 +53,13 @@ export default async function SiteHomePage({
   //   tokenId: data.tokenId,
   // });
 
-
-  const listings = await getTokenListing(
-    data.contract!,
-    data.tokenId!,
-  );
+  const listings = await getTokenListing(data.contract!, data.tokenId!);
 
   const current_price =
     listings && listings.orders && listings.orders.length > 0
-      ? listings?.orders[0].price.amount.decimal + " " + listings?.orders[0].price.currency.symbol
+      ? listings?.orders[0].price.amount.decimal +
+        " " +
+        listings?.orders[0].price.currency.symbol
       : "";
 
   return (
