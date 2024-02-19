@@ -115,7 +115,7 @@ export default async function SiteHomePage({
         <footer className="absolute bottom-0 left-0 w-screen">
           <div className="bg-red mx-auto flex h-[100px]  items-end justify-end">
             <a
-              href="https://alldotbox.com/"
+              href="https://all.box/"
               rel="noreferrer"
               target="_blank"
               className="mb-2 mr-2 text-gray-300 transition-colors duration-300 hover:text-blue-50"
