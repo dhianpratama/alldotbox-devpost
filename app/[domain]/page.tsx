@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
 import { getTokenListing } from "@/lib/reservoir";
+import CustomBuyButton from "./custom-buy-button";
 
 // const getListings = async ({
 //   contract,
@@ -37,7 +38,10 @@ export default async function SiteHomePage({
 }) {
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
-  const buttonColor = data?.buttonColor || "#dc2751";
+
+  // const buttonColor = data?.buttonColor || "#dc2751";
+  const mockData  = { buttonColor:data?.buttonColor || "#dc2751" };
+
   if (!data) {
     notFound();
   }
@@ -101,20 +105,21 @@ export default async function SiteHomePage({
                 </span>
               </a>
             )}
-            <a
+            {/* <a
               href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
               target="_blank"
-              className={`relative flex w-full items-center justify-center overflow-hidden rounded-full border 
-              border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0 
-              before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0 
-              after:h-full after:w-0 after:rounded-r-full after:duration-500 
-              hover:border-[#dc2751] hover:text-[#dc2751] hover:shadow-[#dc2751]  
-              hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-48 lg:px-6 lg:py-3`}
+              // className={`overflow-hidden relative flex w-full items-center justify-center rounded-full border
+              // border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0
+              // before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0
+              // after:h-full after:w-0 after:rounded-r-full after:duration-500 hover:border-[${buttonColor}] hover:text-[${buttonColor}] hover:shadow-[${buttonColor}]  hover:before:w-2/4 hover:after:w-2/4 md:px-5 md:py-2 lg:max-w-48 lg:px-6 lg:py-3`}
             >
               <span className="relative z-10 font-bold  md:text-lg lg:text-xl ">
                 Buy {current_price}
               </span>
-            </a>
+            </a> */}
+            <CustomBuyButton href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`} mockData={mockData }>
+              Buy {current_price}
+            </CustomBuyButton>
           </div>
         </div>
 
