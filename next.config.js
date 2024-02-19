@@ -5,7 +5,7 @@ module.exports = {
   reactStrictMode:false,
   experimental: {
     serverActions: {
-      allowedOrigins: ["app.localhost:3000", "secondcourt.com", "alldotbox.com"."all.box"],
+      allowedOrigins: ["app.localhost:3000", "secondcourt.com", "alldotbox.com","all.box"],
     },
   },
   images: {
