@@ -52,7 +52,7 @@ export default async function SiteSettingsIndex({
           type: "text",
           defaultValue: data?.buttonLink!,
           placeholder: "https://twitter.com/myawesomeusername",
-          maxLength: 32,
+          maxLength: 1000,
         }}
         handleSubmit={updateSite}
       />

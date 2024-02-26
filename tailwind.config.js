@@ -142,9 +142,15 @@ module.exports = {
           "60%": { transform: "translateX(3px) rotate(2.4deg)" },
           "75%": { transform: "translateX(-2px) rotate(-1.2deg)" },
         },
+        marquee: {
+          // '100%': { transform: 'translateX(-50%)' }
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
       animation: {
         wiggle: "wiggle 0.8s both",
+        marquee: "marquee linear infinite"
       },
     },
   },

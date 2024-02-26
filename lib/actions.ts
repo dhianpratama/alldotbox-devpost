@@ -184,6 +184,15 @@ export const updateSite = withSiteAuth(
             ...(blurhash && { imageBlurhash: blurhash }),
           },
         });
+      } else if (key === "buttonLink") {
+        response = await prisma.site.update({
+          where: {
+            id: site.id,
+          },
+          data: {
+            [key]: value,
+          },
+        });
       } else {
         response = await prisma.site.update({
           where: {
@@ -194,7 +203,7 @@ export const updateSite = withSiteAuth(
           },
         });
       }
-      
+
       await revalidateTag(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
       );
