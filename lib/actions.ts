@@ -125,7 +125,7 @@ export const updateSite = withSiteAuth(
         if (site.customDomain && site.customDomain !== value) {
           response = await removeDomainFromVercelProject(site.customDomain);
 
-          /* Optional: remove domain from Vercel team 
+          /* Optional: remove domain from Vercel team
 
           // first, we need to check if the apex domain is being used by other sites
           const apexDomain = getApexDomain(`https://${site.customDomain}`);
@@ -155,7 +155,6 @@ export const updateSite = withSiteAuth(
               site.customDomain
             );
           }
-          
           */
         }
       } else if (key === "image" || key === "logo") {
@@ -184,6 +183,15 @@ export const updateSite = withSiteAuth(
             ...(blurhash && { imageBlurhash: blurhash }),
           },
         });
+      } else if (key === "buttonLink") {
+        response = await prisma.site.update({
+          where: {
+            id: site.id,
+          },
+          data: {
+            [key]: value,
+          },
+        });
       } else {
         response = await prisma.site.update({
           where: {
@@ -194,7 +202,7 @@ export const updateSite = withSiteAuth(
           },
         });
       }
-      
+
       await revalidateTag(
         `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
       );
