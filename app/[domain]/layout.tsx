@@ -16,12 +16,12 @@ export async function generateMetadata({
   }
 
   const {
-    name: title,
+    title,
     description,
     image,
     logo,
   } = data as {
-    name: string;
+    title: string;
     description: string;
     image: string;
     logo: string;
