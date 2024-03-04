@@ -125,7 +125,7 @@ export const updateSite = withSiteAuth(
         if (site.customDomain && site.customDomain !== value) {
           response = await removeDomainFromVercelProject(site.customDomain);
 
-          /* Optional: remove domain from Vercel team 
+          /* Optional: remove domain from Vercel team
 
           // first, we need to check if the apex domain is being used by other sites
           const apexDomain = getApexDomain(`https://${site.customDomain}`);
@@ -155,7 +155,6 @@ export const updateSite = withSiteAuth(
               site.customDomain
             );
           }
-          
           */
         }
       } else if (key === "image" || key === "logo") {

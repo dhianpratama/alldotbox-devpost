@@ -11,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '425px',
+      },
       colors: {
         // light mode
         tremor: {
@@ -130,27 +133,39 @@ module.exports = {
           },
         },
       },
-      keyframes: {
-        wiggle: {
-          "0%, 100%": {
-            transform: "translateX(0%)",
-            transformOrigin: "50% 50%",
-          },
-          "15%": { transform: "translateX(-6px) rotate(-6deg)" },
-          "30%": { transform: "translateX(9px) rotate(6deg)" },
-          "45%": { transform: "translateX(-9px) rotate(-3.6deg)" },
-          "60%": { transform: "translateX(3px) rotate(2.4deg)" },
-          "75%": { transform: "translateX(-2px) rotate(-1.2deg)" },
-        },
-        marquee: {
-          // '100%': { transform: 'translateX(-50%)' }
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-      },
+      // keyframes: {
+      //   wiggle: {
+      //     "0%, 100%": {
+      //       transform: "translateX(0%)",
+      //       transformOrigin: "50% 50%",
+      //     },
+      //     "15%": { transform: "translateX(-6px) rotate(-6deg)" },
+      //     "30%": { transform: "translateX(9px) rotate(6deg)" },
+      //     "45%": { transform: "translateX(-9px) rotate(-3.6deg)" },
+      //     "60%": { transform: "translateX(3px) rotate(2.4deg)" },
+      //     "75%": { transform: "translateX(-2px) rotate(-1.2deg)" },
+      //   },
+      //   marquee: {
+      //     // '100%': { transform: 'translateX(-50%)' }
+      //     '0%': { transform: 'translateX(0%)' },
+      //     // '100%': { transform: 'translateX(-100%)' },
+      //     '100%': { transform: 'translateX(-100%)' },
+      //   },
+      // },
+      // animation: {
+      //   wiggle: "wiggle 0.8s both",
+      //   marquee: "marquee linear infinite"
+      // },
+
       animation: {
-        wiggle: "wiggle 0.8s both",
-        marquee: "marquee linear infinite"
+        "infinite-scroll": "infinite-scroll linear infinite",
+        // 'infinite-scroll': 'infinite-scroll linear infinite',
+      },
+      keyframes: {
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
       },
     },
   },
