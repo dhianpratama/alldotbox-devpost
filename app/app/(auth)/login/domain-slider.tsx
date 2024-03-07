@@ -46,7 +46,8 @@ export default async function DomainSlider() {
                   <Link
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
                     key={i}
-                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1"
+                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1 border border-gray-400"
+                    target="_blank"
                   >
                     <img
                       src={d?.image || "/slider_1.jpg"}
@@ -54,13 +55,13 @@ export default async function DomainSlider() {
                       className="h-full w-full object-cover opacity-[0.4]"
                     />
                     <div className="absolute flex flex-col justify-center p-[0.8rem]  text-white ">
-                      <p className="text-xl font-semibold ">
+                      <p className="text-2xl font-semibold">
                         {d?.customDomain}
                       </p>
 
-                      <p className="text-base font-semibold ">{d?.title}</p>
-                      <p className="w-48 truncate text-sm font-bold underline">
-                        {d?.description}
+                      {/* <p className="text-base font-semibold ">{d?.title}</p> */}
+                      <p className="w-48 truncate text-sm ">
+                        {d?.description || d?.customDomain}
                       </p>
                     </div>
                   </Link>
@@ -80,8 +81,9 @@ export default async function DomainSlider() {
                 return (
                   <Link
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
+                    target="_blank"
                     key={i}
-                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1"
+                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1 border border-gray-400"
                   >
                     <img
                       src={d?.image || "/slider_1.jpg"}
@@ -89,12 +91,12 @@ export default async function DomainSlider() {
                       className="h-full w-full object-cover opacity-[0.4]"
                     />
                     <div className="absolute flex flex-col justify-center p-[0.8rem]  text-white ">
-                      <p className="text-xl font-semibold ">
+                      <p className="text-2xl font-semibold">
                         {d?.customDomain}
                       </p>
 
-                      <p className="text-base font-semibold ">{d?.title}</p>
-                      <p className="w-48 truncate text-sm font-bold underline">
+                      {/* <p className="text-base font-semibold ">{d?.title}</p> */}
+                      <p className="w-48 truncate text-sm ">
                         {d?.description}
                       </p>
                     </div>
