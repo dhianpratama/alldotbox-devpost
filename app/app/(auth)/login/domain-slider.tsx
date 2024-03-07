@@ -1,5 +1,6 @@
-import React, { ReactNode, useState } from "react";
+import React from "react";
 import prisma from "@/lib/prisma";
+import DomainSliderLayout from "./domain-slider-layout";
 import Link from "next/link";
 
 export default async function DomainSlider() {
@@ -45,15 +46,26 @@ export default async function DomainSlider() {
       },
     });
     data = _data;
+    // data = [
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    //   ..._data,
+    // ];
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 
   return (
     <>
-      {/* <div className="mb-4 h-[20vh] md:h-[10vh] xl:h-[20vh] w-full overflow-hidden"> */}
       <div className="w-full overflow-hidden">
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <div
             className="flex animate-infinite-scroll items-center justify-between gap-2 "
             style={{
@@ -79,8 +91,6 @@ export default async function DomainSlider() {
                       <p className="text-2xl font-semibold">
                         {d?.customDomain}
                       </p>
-
-                      {/* <p className="text-base font-semibold ">{d?.title}</p> */}
                       <p className="line-clamp-2 w-48 text-sm ">
                         {d?.description || d?.customDomain}
                       </p>
@@ -115,15 +125,14 @@ export default async function DomainSlider() {
                       <p className="text-2xl font-semibold">
                         {d?.customDomain}
                       </p>
-
-                      {/* <p className="text-base font-semibold ">{d?.title}</p> */}
                       <p className="w-48 truncate text-sm ">{d?.description}</p>
                     </div>
                   </Link>
                 );
               })}
           </div>
-        </div>
+        </div> */}
+      <DomainSliderLayout data={data}/>
       </div>
     </>
   );

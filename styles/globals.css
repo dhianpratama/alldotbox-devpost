@@ -144,3 +144,13 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   text-align: center;
   z-index: 1;
 }
+
+/* the slides */
+.slick-slide {
+  margin: 0 5px;
+}
+
+
+/* .slick-slide{
+  width: auto !important;
+} */
