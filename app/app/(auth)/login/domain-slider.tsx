@@ -4,12 +4,33 @@ import Link from "next/link";
 
 export default async function DomainSlider() {
   let data;
-
+  const _domainstoShow = [
+    "88870.xyz",
+    "gold.box",
+    "g.box",
+    "shoheiohtani.box",
+    "cd.box",
+    "soft.box",
+    "coach.box",
+    "service.box",
+    "aaa.box",
+    "target.box",
+    "dr.xyz",
+    "makeup.box",
+    "saas.box",
+    "fitness.box",
+    "software.box",
+    "nova.box",
+    "our.box",
+    "sad.box",
+    "speed.box",
+    "gas.box",
+  ];
   try {
     const _data = await prisma.site.findMany({
       where: {
         NOT: {
-          customDomain: null,
+          customDomain: { in: _domainstoShow },
         },
       },
       select: {
@@ -40,13 +61,13 @@ export default async function DomainSlider() {
             }}
           >
             {data
-              ?.filter((d :any) => d?.image)
-              .map((d:any, i:number) => {
+              ?.filter((d: any) => d?.image)
+              .map((d: any, i: number) => {
                 return (
                   <Link
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
                     key={i}
-                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1 border border-gray-400"
+                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg border border-gray-400"
                     target="_blank"
                   >
                     <img
@@ -54,13 +75,13 @@ export default async function DomainSlider() {
                       alt=""
                       className="h-full w-full object-cover opacity-[0.4]"
                     />
-                    <div className="absolute flex flex-col justify-center p-[0.8rem]  text-white ">
+                    <div className="absolute flex flex-col justify-center px-[0.2rem] py-[0.8rem]  text-white ">
                       <p className="text-2xl font-semibold">
                         {d?.customDomain}
                       </p>
 
                       {/* <p className="text-base font-semibold ">{d?.title}</p> */}
-                      <p className="w-48 truncate text-sm ">
+                      <p className="line-clamp-2 w-48 text-sm ">
                         {d?.description || d?.customDomain}
                       </p>
                     </div>
@@ -76,14 +97,14 @@ export default async function DomainSlider() {
             }}
           >
             {data
-              ?.filter((d:any) => d?.image)
-              .map((d:any, i:number) => {
+              ?.filter((d: any) => d?.image)
+              .map((d: any, i: number) => {
                 return (
                   <Link
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
                     target="_blank"
                     key={i}
-                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1 border border-gray-400"
+                    className="relative flex h-[100px] w-[250px]  justify-center rounded-lg border border-gray-400 px-1"
                   >
                     <img
                       src={d?.image || "/slider_1.jpg"}
@@ -96,9 +117,7 @@ export default async function DomainSlider() {
                       </p>
 
                       {/* <p className="text-base font-semibold ">{d?.title}</p> */}
-                      <p className="w-48 truncate text-sm ">
-                        {d?.description}
-                      </p>
+                      <p className="w-48 truncate text-sm ">{d?.description}</p>
                     </div>
                   </Link>
                 );

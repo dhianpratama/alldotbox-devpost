@@ -123,7 +123,7 @@ export default function Form({
         )}
       </div>
       {inputAttrs.name === "customDomain" && inputAttrs.defaultValue && (
-        <DomainConfiguration domain={inputAttrs.defaultValue} />
+        <DomainConfiguration domain={inputAttrs.defaultValue} subdomain={""} />
       )}
       <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10">
         <p className="text-sm text-stone-500 dark:text-stone-400">{helpText}</p>

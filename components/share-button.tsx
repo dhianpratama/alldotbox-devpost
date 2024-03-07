@@ -3,10 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface ShareButtonProps {
   quote: string;
-  subdomain: string;
 }
 
-export default function ShareButton({ quote, subdomain }: ShareButtonProps) {
+export default function ShareButton({ quote }: ShareButtonProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState("Copy");
@@ -27,7 +26,7 @@ export default function ShareButton({ quote, subdomain }: ShareButtonProps) {
     };
   }, []);
 
-  const shareUrl = `https://${subdomain}`;
+  // const shareUrl = `https://${subdomain}`;
 
   const handleCopyLink = () => {
     navigator.clipboard
@@ -44,7 +43,7 @@ export default function ShareButton({ quote, subdomain }: ShareButtonProps) {
   };
 
   const handleShareOnTwitter = () => {
-    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(quote)}&url=${encodeURIComponent(shareUrl)}`;
+    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(quote)}`;
     window.open(twitterShareUrl, "_blank");
   };
 
