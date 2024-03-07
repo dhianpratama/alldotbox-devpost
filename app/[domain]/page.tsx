@@ -40,7 +40,7 @@ export default async function SiteHomePage({
   const [data] = await Promise.all([getSiteData(domain)]);
 
   // const buttonColor = data?.buttonColor || "#dc2751";
-  const mockData  = { buttonColor:data?.buttonColor || "#dc2751" };
+  const mockData = { buttonColor: data?.buttonColor || "#dc2751" };
 
   if (!data) {
     notFound();
@@ -67,7 +67,13 @@ export default async function SiteHomePage({
       <div className="body-prevent-scrolling font-hind bg-gray-900 text-base font-normal leading-7 text-gray-300">
         <nav className="absolute left-0 top-0  h-[100px] w-full">
           <div className=" mx-auto flex h-full items-start">
-            <img src="/logo-light.png" className="ml-2 mt-2 w-[100px]" alt="" />
+            <a href={`${data?.refLink || "https://my.box/?ref=iqd4xn"}`} target="_blank">
+              <img
+                src="/logo-light.png"
+                className="ml-2 mt-2 w-[100px]"
+                alt=""
+              />
+            </a>
           </div>
         </nav>
 
@@ -117,7 +123,10 @@ export default async function SiteHomePage({
                 Buy {current_price}
               </span>
             </a> */}
-            <CustomBuyButton href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`} mockData={mockData }>
+            <CustomBuyButton
+              href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
+              mockData={mockData}
+            >
               Buy {current_price}
             </CustomBuyButton>
           </div>

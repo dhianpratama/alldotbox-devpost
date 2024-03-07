@@ -57,20 +57,6 @@ export default async function SiteSettingsIndex({
         handleSubmit={updateSite}
       />
 
-      {/* <Form
-        title="Twitter"
-        description="The twitter handle of your site contact button."
-        helpText="Include twitter so the interested buyer can contact directly."
-        inputAttrs={{
-          name: "twitter",
-          type: "text",
-          defaultValue: data?.twitter!,
-          placeholder: "@awesomename",
-          maxLength: 32,
-        }}
-        handleSubmit={updateSite}
-      /> */}
-
       <Form
         title="Button Color"
         description="Color of Contact Button"
@@ -81,6 +67,19 @@ export default async function SiteSettingsIndex({
           defaultValue: data?.buttonColor!,
           placeholder: "Contact Button Color ",
           maxLength: 32,
+        }}
+        handleSubmit={updateSite}
+      />
+
+      <Form
+        title="Referral link"
+        description="The Referral link of your .box account."
+        helpText="Include Referral link to earn referral bonuses from .box."
+        inputAttrs={{
+          name: "refLink",
+          type: "text",
+          defaultValue: data?.refLink!,
+          placeholder: "https://my.box/?ref=xxxxxx",
         }}
         handleSubmit={updateSite}
       />

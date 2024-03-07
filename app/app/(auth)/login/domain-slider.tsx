@@ -47,6 +47,7 @@ export default async function DomainSlider() {
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
                     key={i}
                     className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1"
+                    target="_blank"
                   >
                     <img
                       src={d?.image || "/slider_1.jpg"}
@@ -80,6 +81,7 @@ export default async function DomainSlider() {
                 return (
                   <Link
                     href={`https://${d?.customDomain ? d.customDomain : "#"}`}
+                    target="_blank"
                     key={i}
                     className="relative flex h-[100px] w-[250px]  justify-center rounded-lg px-1"
                   >
