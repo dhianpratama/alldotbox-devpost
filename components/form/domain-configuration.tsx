@@ -24,14 +24,20 @@ export const InlineSnippet = ({
     </span>
   );
 };
-export default function DomainConfiguration({ domain }: { domain: string }) {
+export default function DomainConfiguration({
+  domain,
+  subdomain,
+}: {
+  domain: string;
+  subdomain: string;
+}) {
   const [recordType, setRecordType] = useState<"A" | "CNAME">("A");
 
   const { status, domainJson } = useDomainStatus({ domain });
 
   if (!status || status === "Valid Configuration" || !domainJson) return null;
 
-  const subdomain = getSubdomain(domainJson.name, domainJson.apexName);
+  // const subdomain = getSubdomain(domainJson.name, domainJson.apexName);
 
   const txtVerification =
     (status === "Pending Verification" &&
@@ -54,7 +60,11 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
             className="text-white dark:text-black"
           />
         )}
-        <p className="text-lg font-semibold dark:text-white">{status}</p>
+        <p className="text-lg font-semibold dark:text-white">
+          {status === "Domain Not Found"
+            ? "Invalid Domain Configuration"
+            : status}
+        </p>
       </div>
       {txtVerification ? (
         <>
@@ -98,7 +108,7 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
         </p>
       ) : (
         <>
-          <div className="flex justify-start space-x-4">
+          {/* <div className="flex justify-start space-x-4">
             <button
               type="button"
               onClick={() => setRecordType("A")}
@@ -119,45 +129,40 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
                   : "border-white text-stone-400 dark:border-black dark:text-stone-600"
               } ease border-b-2 pb-1 text-sm transition-all duration-150`}
             >
-              CNAME Record{subdomain && " (recommended)"}
+              ALIAS Record{subdomain && " (recommended)"}
             </button>
-          </div>
+          </div> */}
           <div className="my-3 text-left">
             <p className="my-5 text-sm dark:text-white">
-              To configure your{" "}
-              {recordType === "A" ? "apex domain" : "subdomain"} (
+              To configure your apex domain (
               <InlineSnippet>
                 {recordType === "A" ? domainJson.apexName : domainJson.name}
               </InlineSnippet>
-              ), set the following {recordType} record on your DNS provider to
+              ), set the following ALIAS record on your DNS provider to
               continue:
             </p>
             <div className="flex items-center justify-start space-x-10 rounded-md bg-stone-50 p-2 dark:bg-stone-800 dark:text-white">
               <div>
                 <p className="text-sm font-bold">Type</p>
-                <p className="mt-2 font-mono text-sm">{recordType}</p>
+                <p className="mt-2 font-mono text-sm">ALIAS</p>
               </div>
               <div>
                 <p className="text-sm font-bold">Name</p>
-                <p className="mt-2 font-mono text-sm">
-                  {recordType === "A" ? "@" : subdomain ?? "www"}
-                </p>
+                <p className="mt-2 font-mono text-sm">@</p>
               </div>
               <div>
                 <p className="text-sm font-bold">Value</p>
                 <p className="mt-2 font-mono text-sm">
-                  {recordType === "A"
-                    ? `76.76.21.21`
-                    : `cname.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
+                  {`${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-bold">TTL</p>
-                <p className="mt-2 font-mono text-sm">86400</p>
+                <p className="mt-2 font-mono text-sm">3600</p>
               </div>
             </div>
             <p className="mt-5 text-sm dark:text-white">
-              Note: for TTL, if <InlineSnippet>86400</InlineSnippet> is not
+              Note: for TTL, if <InlineSnippet>3600</InlineSnippet> is not
               available, set the highest value possible. Also, domain
               propagation can take up to an hour.
             </p>

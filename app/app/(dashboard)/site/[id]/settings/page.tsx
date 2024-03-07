@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
 import DeleteSiteForm from "@/components/modal/delete-site";
+import DomainConfiguration from "@/components/form/domain-configuration";
 
 export default async function SiteSettingsIndex({
   params,
@@ -16,6 +17,13 @@ export default async function SiteSettingsIndex({
 
   return (
     <div className="flex flex-col space-y-6">
+      {/* <DomainConfiguration domain={data?.customDomain!} />  */}
+      <div className="rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-black">
+        <DomainConfiguration
+          domain={data?.customDomain!}
+          subdomain={data?.subdomain!}
+        />
+      </div>
       <Form
         title="Title"
         description="The main text for your site."
