@@ -92,7 +92,7 @@ model Site {
   tokenId         String?
   contract        String?
   chainId         String?
-
+  refLink         String?
   @@index([userId])
 }
 
