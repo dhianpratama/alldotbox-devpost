@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
-import DomainSliderLayout from "./domain-slider-layout";
+// import DomainSliderLayout from "./domain-slider-layout";
 import Link from "next/link";
 
 export default async function DomainSlider() {
@@ -30,9 +30,7 @@ export default async function DomainSlider() {
   try {
     const _data = await prisma.site.findMany({
       where: {
-        NOT: {
           customDomain: { in: _domainstoShow },
-        },
       },
       select: {
         customDomain: true,
@@ -46,6 +44,7 @@ export default async function DomainSlider() {
       },
     });
     data = _data;
+
     // data = [
     //   ..._data,
     //   ..._data,
@@ -65,7 +64,7 @@ export default async function DomainSlider() {
   return (
     <>
       <div className="w-full overflow-hidden">
-        {/* <div className="flex gap-2">
+        <div className="flex gap-2">
           <div
             className="flex animate-infinite-scroll items-center justify-between gap-2 "
             style={{
@@ -131,8 +130,8 @@ export default async function DomainSlider() {
                 );
               })}
           </div>
-        </div> */}
-      <DomainSliderLayout data={data}/>
+        </div>
+      {/* <DomainSliderLayout data={data}/> */}
       </div>
     </>
   );
