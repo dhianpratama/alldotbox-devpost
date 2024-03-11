@@ -34,13 +34,13 @@ export default async function SiteAnalyticsLayout({
         <h1 className="font-cal text-xl font-bold sm:text-3xl dark:text-white">
           Settings for {data.name}
         </h1>
-        <div className="flex flex-col">
-          <div className="flex space-x-1">
+        <div className="flex flex-col space-y-2">
+          <div className="flex space-x-1 items-center">
             <a
               href={`https://${data?.customDomain}`}
               target="_blank"
               rel="noreferrer"
-              className="truncate rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+              className="truncate p-1 rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
             >
               {data?.customDomain}
             </a>
@@ -62,7 +62,7 @@ export default async function SiteAnalyticsLayout({
             }
             target="_blank"
             rel="noreferrer"
-            className="truncate rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+            className="truncate p-1 rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
           >
             {url} ↗
           </a>
