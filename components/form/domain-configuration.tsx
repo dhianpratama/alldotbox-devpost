@@ -132,14 +132,17 @@ export default function DomainConfiguration({
               ALIAS Record{subdomain && " (recommended)"}
             </button>
           </div> */}
-          <div className="my-3 text-left">
-            <p className="my-5 text-sm dark:text-white">
+          <div className="my-3 text-left ">
+            <p className="my-5 text-sm dark:text-white ">
               To configure your apex domain (
               <InlineSnippet>
                 {recordType === "A" ? domainJson.apexName : domainJson.name}
               </InlineSnippet>
               ), set the following ALIAS record on your DNS provider to
               continue:
+             <span className="ml-2">
+             <a href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-namefi-domains" target="_blank" className="text-gray-300 text-sm mb-1 lg:mb-0 underline">Learn More</a>
+              </span>
             </p>
             <div className="flex items-center justify-start space-x-10 rounded-md bg-stone-50 p-2 dark:bg-stone-800 dark:text-white">
               <div>
