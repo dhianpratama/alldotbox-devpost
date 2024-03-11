@@ -50,8 +50,9 @@ export default function DomainCard({ data }: { data: any }) {
                   </UnpublishSiteButton>
                 </PopoverMenu>
 
-                <ShareButton quote={`I built my first website on tokenized domains. Check out ${data.customDomain}`} subdomain={data.customDomain} />
-
+                <ShareButton
+                  quote={`I built my first website on tokenized domains. Check out ${data.customDomain}`}
+                />
               </div>
             </>
           )}
@@ -70,7 +71,7 @@ export default function DomainCard({ data }: { data: any }) {
                   href={`https://${data?.token?.name}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate p-1 rounded-md bg-stone-100 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+                  className="truncate rounded-md bg-stone-100 p-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
                 >
                   {data?.token?.name}
                 </a>
@@ -78,7 +79,7 @@ export default function DomainCard({ data }: { data: any }) {
                   href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-domains"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-stone-600 flex items-center"
+                  className="flex items-center text-stone-600"
                 >
                   <InfoIcon width={18} />
                 </a>
@@ -98,7 +99,7 @@ export default function DomainCard({ data }: { data: any }) {
                 {url} ↗
               </a>
               <span className="flex items-center rounded-md bg-green-100 p-1  text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
-              <p className="w-10">● Live</p>
+                <p className="w-10">● Live</p>
               </span>
             </div>
           </div>
