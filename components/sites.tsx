@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getUserDomains } from "@/lib/reservoir";
 import { uint256Tobytes32 } from "@/lib/web3";
 import { get3DnsDomainInfo } from "@/lib/3dns";
+import { registry } from "@/lib/config";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
@@ -14,10 +15,22 @@ export default async function Sites({ limit }: { limit?: number }) {
     redirect("/login");
   }
 
-  const { tokens } = await getUserDomains(
+  const { tokens: boxTokens } = await getUserDomains(
     session.user.address,
-    "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
+    registry.BOX,
   );
+
+  const { tokens: namefiTokens } = await getUserDomains(
+    session.user.address,
+    registry.NAMEFI,
+  );
+
+  const { tokens: threeDNSTokens } = await getUserDomains(
+    session.user.address,
+    registry.THREEDNS,
+  );
+
+  const tokens = [...boxTokens, ...namefiTokens, ...threeDNSTokens];
 
   const sites = await prisma.site.findMany({
     where: {
@@ -33,7 +46,7 @@ export default async function Sites({ limit }: { limit?: number }) {
 
   const ownerTokens = await Promise.all(
     tokens?.map(async ({ token }: { token: any }) => {
-      const dbSite = sites.find((s:any) => s.tokenId === token.tokenId);
+      const dbSite = sites.find((s: any) => s.tokenId === token.tokenId);
 
       if (!token.name) {
         const onChainDNSData = await get3DnsDomainInfo(
@@ -57,7 +70,6 @@ export default async function Sites({ limit }: { limit?: number }) {
       };
     }),
   );
-
 
   return ownerTokens?.length > 0 ? (
     <>

@@ -2,34 +2,7 @@ import { notFound } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
 import { getTokenListing } from "@/lib/reservoir";
 import CustomBuyButton from "./custom-buy-button";
-
-// const getListings = async ({
-//   contract,
-//   tokenId,
-//   chainId,
-//   protocol,
-// }: {
-//   contract: string | null;
-//   tokenId: string | null;
-//   chainId: string | null;
-//   protocol: string | null;
-// }) => {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       accept: "application/json",
-//       "x-api-key": "e8f3013899434a2a91568d87114a63c7",
-//     },
-//   };
-
-//   const listingsRes = await fetch(
-//     `https://api.opensea.io/api/v2/orders/${chainId}/${protocol}/listings?asset_contract_address=${contract}&token_ids=${tokenId}`,
-//     options,
-//   );
-
-//   const listings = listingsRes.json();
-//   return listings;
-// };
+import { getRegistryByContract, registry, reservoir } from "@/lib/config";
 
 export default async function SiteHomePage({
   params,
@@ -39,19 +12,24 @@ export default async function SiteHomePage({
   const domain = decodeURIComponent(params.domain);
   const [data] = await Promise.all([getSiteData(domain)]);
 
+  const _registry = getRegistryByContract(data?.contract!);
+  const tld = data?.customDomain?.split(".").pop();
+  let _referralLink = _registry.referralLink;
+
+  if (tld && tld === "box") {
+    // .box logo
+    _registry.logo = "/box-logo.png";
+    _referralLink = data?.refLink
+      ? data?.refLink
+      : reservoir[registry.BOX].referralLink;
+  }
+
   // const buttonColor = data?.buttonColor || "#dc2751";
   const mockData = { buttonColor: data?.buttonColor || "#dc2751" };
 
   if (!data) {
     notFound();
   }
-
-  // const listings = await getListings({
-  //   chainId: data.chainId,
-  //   protocol: "seaport",
-  //   contract: data.contract,
-  //   tokenId: data.tokenId,
-  // });
 
   const listings = await getTokenListing(data.contract!, data.tokenId!);
 
@@ -67,9 +45,9 @@ export default async function SiteHomePage({
       <div className="body-prevent-scrolling font-hind bg-gray-900 text-base font-normal leading-7 text-gray-300">
         <nav className="absolute left-0 top-0  h-[100px] w-full">
           <div className=" mx-auto flex h-full items-start">
-            <a href={`${data?.refLink || "https://my.box/?ref=iqd4xn"}`} target="_blank">
+            <a href={`${_referralLink}`} target="_blank">
               <img
-                src="/logo-light.png"
+                src={_registry?.logo}
                 className="ml-2 mt-2 w-[100px]"
                 alt=""
               />
