@@ -15,7 +15,7 @@ export const reservoir: Reservoir = {
     url: "https://api-optimism.reservoir.tools",
     contract: "", // no need to set contract as we need only metadata
     chainId: 10,
-    logo:"/box-logo.png",
+    logo:"/box-logo-new.png",
     referralLink:"https://my.box/?ref=iqd4xn",
     openSeaLink:"https://opensea.io/assets/optimism/0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17"
   },
@@ -23,7 +23,7 @@ export const reservoir: Reservoir = {
     url: "https://api-optimism.reservoir.tools",
     contract: "0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17",
     chainId: 10,
-    logo:"/3dns-logo.png",
+    logo:"/3dns-logo-new.png",
     referralLink:"https://app.3dns.box/?ref=irxy7a",
     openSeaLink:"https://opensea.io/assets/optimism/0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17"
   },
