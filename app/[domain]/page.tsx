@@ -10,7 +10,11 @@ export default async function SiteHomePage({
   params: { domain: string };
 }) {
   const domain = decodeURIComponent(params.domain);
-  
+
+  if (domain === "robots.txt") {
+    return;
+  }
+
   const [data] = await Promise.all([getSiteData(domain)]);
 
   let _registry = getRegistryByContract(data?.contract!);
@@ -24,6 +28,8 @@ export default async function SiteHomePage({
       ? data?.refLink
       : reservoir[registry.BOX].referralLink;
   }
+
+  console.log(domain + " _registry_registry :: ", _registry);
 
   // const buttonColor = data?.buttonColor || "#dc2751";
   const mockData = { buttonColor: data?.buttonColor || "#dc2751" };
