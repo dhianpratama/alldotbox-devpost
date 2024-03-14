@@ -24,12 +24,14 @@ export default async function SiteHomePage({
   console.log("data before ", data);
   console.log("tld ", tld);
   if (tld && tld === "box") {
-    console.log("in if cond");
+    console.log("in if cond ", tld);
     // .box logo
     _registry.logo = "/box-logo-new2.png";
     _referralLink = data?.refLink
       ? data?.refLink
       : reservoir[registry.BOX].referralLink;
+  } else {
+    console.log("in else cond ", tld);
   }
 
   console.log(domain + " _registry_registry after :: ", _registry);
