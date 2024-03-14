@@ -102,7 +102,7 @@ export default async function SiteHomePage({
               </span>
             </a> */}
             <CustomBuyButton
-              href={`https://opensea.io/assets/optimism/${data?.contract}/${data?.tokenId}`}
+              href={`${_registry.openSeaLink}/${data?.tokenId}`}
               mockData={mockData}
             >
               Buy {current_price}
