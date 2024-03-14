@@ -26,7 +26,7 @@ export default async function SiteHomePage({
   if (tld && tld === "box") {
     console.log("in if cond ", tld);
     // .box logo
-    _registry.logo = "/box-logo-new2.png";
+    // _registry.logo = "/box-logo-new2.png";
     _referralLink = data?.refLink
       ? data?.refLink
       : reservoir[registry.BOX].referralLink;
