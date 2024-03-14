@@ -20,8 +20,11 @@ export default async function SiteHomePage({
   let _registry = getRegistryByContract(data?.contract!);
   const tld = data?.customDomain?.split(".").pop();
   let _referralLink = _registry.referralLink;
-
+  console.log("_registry before ", _registry);
+  console.log("data before ", data);
+  console.log("tld ", tld);
   if (tld && tld === "box") {
+    console.log("in if cond");
     // .box logo
     _registry.logo = "/box-logo.png";
     _referralLink = data?.refLink
@@ -29,7 +32,7 @@ export default async function SiteHomePage({
       : reservoir[registry.BOX].referralLink;
   }
 
-  console.log(domain + " _registry_registry :: ", _registry);
+  console.log(domain + " _registry_registry after :: ", _registry);
 
   // const buttonColor = data?.buttonColor || "#dc2751";
   const mockData = { buttonColor: data?.buttonColor || "#dc2751" };
