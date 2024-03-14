@@ -10,9 +10,10 @@ export default async function SiteHomePage({
   params: { domain: string };
 }) {
   const domain = decodeURIComponent(params.domain);
+  
   const [data] = await Promise.all([getSiteData(domain)]);
 
-  const _registry = getRegistryByContract(data?.contract!);
+  let _registry = getRegistryByContract(data?.contract!);
   const tld = data?.customDomain?.split(".").pop();
   let _referralLink = _registry.referralLink;
 

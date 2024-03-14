@@ -13,11 +13,11 @@ interface Reservoir {
 export const reservoir: Reservoir = {
   box: {
     url: "https://api-optimism.reservoir.tools",
-    contract: "0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe",
+    contract: "", // no need to set contract as we need only metadata
     chainId: 10,
     logo:"/box-logo.png",
     referralLink:"https://my.box/?ref=iqd4xn",
-    openSeaLink:"https://opensea.io/assets/optimism/0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe"
+    openSeaLink:"https://opensea.io/assets/optimism/0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17"
   },
   "3dns-powered-domains": {
     url: "https://api-optimism.reservoir.tools",
