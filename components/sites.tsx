@@ -6,7 +6,7 @@ import Image from "next/image";
 import { getUserDomains } from "@/lib/reservoir";
 import { uint256Tobytes32 } from "@/lib/web3";
 import { get3DnsDomainInfo } from "@/lib/3dns";
-import { registry } from "@/lib/config";
+import { registry, reservoir } from "@/lib/config";
 
 export default async function Sites({ limit }: { limit?: number }) {
   const session = await getSession();
@@ -15,9 +15,14 @@ export default async function Sites({ limit }: { limit?: number }) {
     redirect("/login");
   }
 
-  const { tokens: boxTokens } = await getUserDomains(
+  // const { tokens: boxTokens } = await getUserDomains(
+  //   session.user.address,
+  //   registry.BOX,
+  // );
+
+  const { tokens: threeDNSTokens } = await getUserDomains(
     session.user.address,
-    registry.BOX,
+    registry.THREEDNS,
   );
 
   const { tokens: namefiTokens } = await getUserDomains(
@@ -25,12 +30,7 @@ export default async function Sites({ limit }: { limit?: number }) {
     registry.NAMEFI,
   );
 
-  const { tokens: threeDNSTokens } = await getUserDomains(
-    session.user.address,
-    registry.THREEDNS,
-  );
-
-  const tokens = [...boxTokens, ...namefiTokens, ...threeDNSTokens];
+  const tokens = [...threeDNSTokens, ...namefiTokens];
 
   const sites = await prisma.site.findMany({
     where: {
@@ -48,7 +48,8 @@ export default async function Sites({ limit }: { limit?: number }) {
     tokens?.map(async ({ token }: { token: any }) => {
       const dbSite = sites.find((s: any) => s.tokenId === token.tokenId);
 
-      if (!token.name) {
+      // if 3dns domain name is null we fetch name from 3dns API 
+      if (!token.name && token?.contract?.toLowerCase() === reservoir[registry.THREEDNS].contract.toLowerCase()) {
         const onChainDNSData = await get3DnsDomainInfo(
           uint256Tobytes32(token.tokenId),
         );
