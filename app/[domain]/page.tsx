@@ -17,24 +17,16 @@ export default async function SiteHomePage({
 
   const [data] = await Promise.all([getSiteData(domain)]);
 
-  let _registry = getRegistryByContract(data?.contract!);
+  const _registry = getRegistryByContract(data?.contract!);
   const tld = data?.customDomain?.split(".").pop();
-  let _referralLink = _registry.referralLink;
-  console.log("_registry before ", _registry);
-  console.log("data before ", data);
-  console.log("tld ", tld);
-  if (tld && tld === "box") {
-    console.log("in if cond ", tld);
-    // .box logo
-    // _registry.logo = "/box-logo-new2.png";
-    _referralLink = data?.refLink
-      ? data?.refLink
-      : reservoir[registry.BOX].referralLink;
-  } else {
-    console.log("in else cond ", tld);
-  }
-
-  console.log(domain + " _registry_registry after :: ", _registry);
+  // let _referralLink = _registry.referralLink;
+  // if (tld && tld === "box") {
+  //   // .box logo
+  //   _registry.logo = "/box-logo-new.png";
+  //   _referralLink = data?.refLink
+  //     ? data?.refLink
+  //     : reservoir[registry.BOX].referralLink;
+  // }
 
   // const buttonColor = data?.buttonColor || "#dc2751";
   const mockData = { buttonColor: data?.buttonColor || "#dc2751" };
@@ -57,9 +49,20 @@ export default async function SiteHomePage({
       <div className="body-prevent-scrolling font-hind bg-gray-900 text-base font-normal leading-7 text-gray-300">
         <nav className="absolute left-0 top-0  h-[100px] w-full">
           <div className=" mx-auto flex h-full items-start">
-            <a href={`${_referralLink}`} target="_blank">
+            <a
+              href={
+                tld && tld === "box"
+                  ? data?.refLink
+                    ? data?.refLink
+                    : `${reservoir[registry.BOX].referralLink}`
+                  : `${_registry.referralLink}`
+              }
+              target="_blank"
+            >
               <img
-                src={_registry?.logo}
+                src={
+                  tld && tld === "box" ? "/box-logo-new.png" : _registry?.logo
+                }
                 className="ml-2 mt-2 w-[100px]"
                 alt=""
               />

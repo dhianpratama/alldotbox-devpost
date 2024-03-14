@@ -15,7 +15,7 @@ export const reservoir: Reservoir = {
     url: "https://api-optimism.reservoir.tools",
     contract: "", // no need to set contract as we need only metadata
     chainId: 10,
-    logo:"/box-logo-new1.png",
+    logo:"/box-logo-new.png",
     referralLink:"https://my.box/?ref=iqd4xn",
     openSeaLink:"https://opensea.io/assets/optimism/0xbb7b805b257d7c76ca9435b3ffe780355e4c4b17"
   },
