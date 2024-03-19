@@ -22,7 +22,6 @@ export default function DomainCard({ data }: { data: any }) {
   const { status, domainJson, loading } = useDomainStatus({
     domain: data?.token?.name,
   });
-  console.log(">>>>> ", status);
 
   return (
     <div className="relative rounded-lg border border-stone-200 pb-5 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">

@@ -60,7 +60,7 @@ export const createSite = async (formData: FormData) => {
       await Promise.all([
         addDomainToVercel(customDomain),
         // Optional: add www subdomain as well and redirect to apex domain
-        addDomainToVercel(`www.${customDomain}`),
+        // addDomainToVercel(`www.${customDomain}`),
       ]);
     }
     await revalidateTag(
