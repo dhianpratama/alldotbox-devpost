@@ -11,7 +11,6 @@ import va from "@vercel/analytics";
 import { useState } from "react";
 import { CreateSiteProps } from "@/lib/types";
 import { InfoIcon } from "lucide-react";
-import Link from "next/link";
 
 export default function CreateSiteModalV2({
   siteData,
