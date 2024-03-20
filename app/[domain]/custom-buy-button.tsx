@@ -16,7 +16,7 @@ interface CustomButtonProps {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`overflow-hidden relative flex w-full items-center justify-center rounded-full border
-                    border-white  px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0
+                    border-white px-0.5 sm:px-4 py-2 text-white shadow-lg transition-all before:absolute before:left-0 before:top-0
                     before:h-full before:w-0 before:rounded-l-full before:duration-500 after:absolute after:right-0 after:top-0
                     after:h-full after:w-0 after:rounded-r-full after:duration-500 md:px-5 md:py-2 lg:max-w-48 lg:px-6 lg:py-3`}
         style={{
