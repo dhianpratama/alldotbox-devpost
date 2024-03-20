@@ -3,6 +3,8 @@ import { getSiteData } from "@/lib/fetchers";
 import { getTokenListing } from "@/lib/reservoir";
 import CustomBuyButton from "./custom-buy-button";
 import { getRegistryByContract, registry, reservoir } from "@/lib/config";
+import { InteractiveMarquee } from "@/components/marquee";
+import TextSlider from "@/components/name-slider";
 
 export default async function SiteHomePage({
   params,
@@ -44,6 +46,8 @@ export default async function SiteHomePage({
         listings?.orders[0].price.currency.symbol
       : "";
 
+  
+
   return (
     <>
       <div className="body-prevent-scrolling font-hind bg-gray-900 text-base font-normal leading-7 text-gray-300">
@@ -79,15 +83,35 @@ export default async function SiteHomePage({
         </div>
 
         {/* <!-- Content Container --> */}
-        <div className="content-container  space-y-8 w-svw p-2">
+        <div className="content-container  w-svw space-y-8 p-2">
           {/* <!-- Your Title, Subtitle, and Button --> */}
-          <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl">
-            {data?.title}
-          </h1>
+          <TextSlider text={data?.title!}/>
+          {/* <div className="flex gap-8">
+            <div
+              className="animate-infinite-scroll"
+              style={{
+                animationDuration: "10s",
+              }}
+            >
+              <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl ">
+                {data?.title}
+              </h1>
+            </div>
+            <div
+              className="animate-infinite-scroll"
+              style={{
+                animationDuration: "10s",
+              }}
+            >
+              <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl ">
+                {data?.title}
+              </h1>
+            </div>
+          </div> */}
           <p className="text-lg text-white sm:text-xl  md:px-4  md:text-2xl lg:text-3xl">
             {data?.description}
           </p>
-          <div className="flex flex-col items-center justify-center gap-x-4 gap-y-6 md:flex-row md:px-16">
+          <div className="flex  items-center justify-center gap-x-2 gap-y-6 flex-row md:px-16">
             {data?.buttonLink && (
               <a
                 style={{
