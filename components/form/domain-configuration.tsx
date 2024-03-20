@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDomainStatus } from "./use-domain-status";
 import { getSubdomain } from "@/lib/domains";
 import { AlertCircle, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getRegistryByContract, registry, reservoir } from "@/lib/config";
 
 export const InlineSnippet = ({
   className,
@@ -27,17 +28,29 @@ export const InlineSnippet = ({
 export default function DomainConfiguration({
   domain,
   subdomain,
+  contract,
 }: {
   domain: string;
   subdomain: string;
+  contract: string;
 }) {
-  const [recordType, setRecordType] = useState<"A" | "CNAME">("A");
+  const [recordType, setRecordType] = useState<"A" | "ALIAS">("ALIAS");
 
   const { status, domainJson } = useDomainStatus({ domain });
 
-  if (!status || status === "Valid Configuration" || !domainJson) return null;
+  useEffect(() => {
+    // hide sidebar on path change
+    const tld = domain?.split(".").pop();
+    if (tld === "box") {
+      setRecordType("ALIAS");
+    } else if (contract === reservoir[registry.NAMEFI].contract) {
+      setRecordType("A");
+    } else if (contract === reservoir[registry.THREEDNS].contract) {
+      setRecordType("ALIAS");
+    }
+  }, [contract]);
 
-  // const subdomain = getSubdomain(domainJson.name, domainJson.apexName);
+  if (!status || status === "Valid Configuration" || !domainJson) return null;
 
   const txtVerification =
     (status === "Pending Verification" &&
@@ -108,64 +121,43 @@ export default function DomainConfiguration({
         </p>
       ) : (
         <>
-          {/* <div className="flex justify-start space-x-4">
-            <button
-              type="button"
-              onClick={() => setRecordType("A")}
-              className={`${
-                recordType == "A"
-                  ? "border-black text-black dark:border-white dark:text-white"
-                  : "border-white text-stone-400 dark:border-black dark:text-stone-600"
-              } ease border-b-2 pb-1 text-sm transition-all duration-150`}
-            >
-              A Record{!subdomain && " (recommended)"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setRecordType("CNAME")}
-              className={`${
-                recordType == "CNAME"
-                  ? "border-black text-black dark:border-white dark:text-white"
-                  : "border-white text-stone-400 dark:border-black dark:text-stone-600"
-              } ease border-b-2 pb-1 text-sm transition-all duration-150`}
-            >
-              ALIAS Record{subdomain && " (recommended)"}
-            </button>
-          </div> */}
-          <div className="my-3 text-left ">
-            <p className="my-5 text-sm dark:text-white ">
-              To configure your apex domain (
+         
+          <div className="my-3 text-left">
+            <p className="my-5 text-sm dark:text-white">
+              To configure your{" "}
+              {recordType === "A" ? "apex domain" : "subdomain"} (
               <InlineSnippet>
                 {recordType === "A" ? domainJson.apexName : domainJson.name}
               </InlineSnippet>
-              ), set the following ALIAS record on your DNS provider to
+              ), set the following {recordType} record on your DNS provider to
               continue:
-             <span className="ml-2">
-             <a href="https://blog.ensdom.com/blog/a-simple-for-sale-lander-for-box-namefi-domains" target="_blank" className="dark:text-gray-300 text-sm mb-1 lg:mb-0 underline text-black">Learn More</a>
-              </span>
             </p>
             <div className="flex items-center justify-start space-x-10 rounded-md bg-stone-50 p-2 dark:bg-stone-800 dark:text-white">
               <div>
                 <p className="text-sm font-bold">Type</p>
-                <p className="mt-2 font-mono text-sm">ALIAS</p>
+                <p className="mt-2 font-mono text-sm">{recordType}</p>
               </div>
               <div>
                 <p className="text-sm font-bold">Name</p>
-                <p className="mt-2 font-mono text-sm">@</p>
+                <p className="mt-2 font-mono text-sm">
+                  {/* {recordType === "A" ? "@" : subdomain ?? "www"} */}@
+                </p>
               </div>
               <div>
                 <p className="text-sm font-bold">Value</p>
                 <p className="mt-2 font-mono text-sm">
-                  {`${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
+                  {recordType === "A"
+                    ? `76.76.21.21`
+                    : `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-bold">TTL</p>
-                <p className="mt-2 font-mono text-sm">3600</p>
+                <p className="mt-2 font-mono text-sm">86400</p>
               </div>
             </div>
             <p className="mt-5 text-sm dark:text-white">
-              Note: for TTL, if <InlineSnippet>3600</InlineSnippet> is not
+              Note: for TTL, if <InlineSnippet>86400</InlineSnippet> is not
               available, set the highest value possible. Also, domain
               propagation can take up to an hour.
             </p>

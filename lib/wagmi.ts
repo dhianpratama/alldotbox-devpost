@@ -1,9 +1,9 @@
 import { http, createConfig,cookieStorage,createStorage  } from 'wagmi'
-import { mainnet } from 'wagmi/chains'
+import { mainnet, optimism } from 'wagmi/chains'
 import { injected } from 'wagmi/connectors'
 
 export const config = createConfig({
-  chains: [mainnet],
+  chains: [mainnet,optimism],
   connectors: [
     injected(),
   ],
@@ -13,6 +13,7 @@ export const config = createConfig({
   }),  
   transports: {
     [mainnet.id]: http(),
+    [optimism.id]: http(),
   },
 })
 

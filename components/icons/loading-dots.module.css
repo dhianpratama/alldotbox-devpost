@@ -27,6 +27,18 @@
   animation-delay: 0.4s;
 }
 
+/* .loading span:nth-child(1) {
+  background-color: var(--dot-color, #000);
+}
+
+.loading span:nth-child(2) {
+  background-color: var(--dot-color, #000);
+}
+
+.loading span:nth-child(3) {
+  background-color: var(--dot-color, #000);
+} */
+
 @keyframes blink {
   0% {
     opacity: 0.2;

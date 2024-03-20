@@ -197,7 +197,7 @@ function CreateSiteFormButton() {
       )}
       disabled={pending}
     >
-      {pending ? <LoadingDots color="#808080" /> : <p>Create Site</p>}
+      {pending ? <LoadingDots  color="#808080" /> : <p>Create Site</p>}
     </button>
   );
 }

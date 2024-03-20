@@ -15,6 +15,7 @@ export default async function SiteSettingsIndex({
     },
   });
 
+
   return (
     <div className="flex flex-col space-y-6">
       {/* <DomainConfiguration domain={data?.customDomain!} />  */}
@@ -22,6 +23,7 @@ export default async function SiteSettingsIndex({
         <DomainConfiguration
           domain={data?.customDomain!}
           subdomain={data?.subdomain!}
+          contract={data?.contract!}
         />
       </div>
       <Form
