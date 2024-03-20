@@ -79,7 +79,7 @@ export default async function SiteHomePage({
         </div>
 
         {/* <!-- Content Container --> */}
-        <div className="content-container  space-y-8">
+        <div className="content-container  space-y-8 w-svw p-2">
           {/* <!-- Your Title, Subtitle, and Button --> */}
           <h1 className="text-6xl font-bold text-white sm:text-7xl md:text-8xl lg:text-9xl">
             {data?.title}

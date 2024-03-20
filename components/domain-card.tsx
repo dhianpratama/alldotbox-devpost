@@ -8,22 +8,39 @@ import CreateSiteModalV2 from "./modal/create-site-v2";
 import PopoverMenu from "./popover-menu";
 import DeleteSiteForm from "./modal/delete-site";
 import UnpublishSiteButton from "./unpublish-site-button";
-import { InfoIcon, Share2 } from "lucide-react";
+import { AlertCircle, InfoIcon, Share2, XCircle } from "lucide-react";
 import ShareButton from "./share-button";
+import { getRegistryByContract } from "@/lib/config";
+import { useDomainStatus } from "./form/use-domain-status";
+import LoadingDots from "./icons/loading-dots";
+import Tooltip from "./tooltip";
+import Leaflet from "./modal/leaflet";
 
 export default function DomainCard({ data }: { data: any }) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+  const _registry = getRegistryByContract(data?.contract);
+  const { status, domainJson, loading } = useDomainStatus({
+    domain: data?.token?.name,
+  });
+
   return (
     <div className="relative rounded-lg border border-stone-200 pb-5 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">
-      <BlurImage
-        alt={data?.token?.name ?? "Card thumbnail"}
-        width={500}
-        height={500}
-        className="h-44 object-cover"
-        src={data?.image ?? "/placeholder.png"}
-        placeholder="blur"
-        blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
-      />
+      <div className="relative flex">
+        <BlurImage
+          alt={data?.token?.name ?? "Card thumbnail"}
+          width={500}
+          height={500}
+          className="h-44 object-cover"
+          src={data?.image ?? "/placeholder.png"}
+          placeholder="blur"
+          blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
+        />
+        <img
+          src={`${_registry.logo}`}
+          className="absolute ml-2 mt-2 w-[75px]"
+          alt=""
+        />
+      </div>
       <div className="border-t border-stone-200 p-4 dark:border-stone-700">
         <div className="flex items-center justify-between gap-2">
           <h3 className="my-0 truncate font-cal text-xl font-bold tracking-wide dark:text-white">
@@ -98,9 +115,35 @@ export default function DomainCard({ data }: { data: any }) {
               >
                 {url} ↗
               </a>
-              <span className="flex items-center rounded-md bg-green-100 p-1  text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
-                <p className="w-10">● Live</p>
-              </span>
+
+              {loading ? (
+                <LoadingDots color="#A8A29E"/>
+              ) : !status || status === "Valid Configuration" || !domainJson ? (
+                <span className="flex items-center rounded-md bg-green-100 p-1  text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
+                  <p className="w-10">● Live</p>
+                </span>
+              ) : (
+                <div className="group relative flex">
+                  <span className="flex items-center rounded-md bg-red-100 p-1  text-sm font-medium text-red-600 transition-colors hover:bg-red-200 dark:bg-red-900 dark:bg-opacity-50 dark:text-red-400 dark:hover:bg-red-800 dark:hover:bg-opacity-50">
+                    <p className="w-14">● Invalid</p>
+                  </span>
+                  <div
+                    style={{
+                      marginTop: "38px",
+                      zIndex:9,
+                    }}
+                    className="translate-y-auto absolute mx-auto -translate-x-3/4 rounded-md dark:bg-stone-800 bg-stone-100 dark:text-stone-300 px-1 text-sm text-black  opacity-0 transition-opacity group-hover:opacity-100"
+                    // className="translate-y-auto absolute left-0 md:left-5 m-4 mx-auto -translate-x-full rounded-md bg-gray-800 px-1 text-sm text-gray-100 opacity-0 transition-opacity group-hover:opacity-100"
+                  >
+                    <div className="flex flex-wrap w-52 p-2">
+                      <div>DNS Configuration is Invalid.</div>
+                      <div>
+                        <a href="" className="underline" target="_blank">See tutorial</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
