@@ -77,7 +77,7 @@ export default function SiweLoginButton() {
       }   group my-2 flex h-10 w-full transform items-center justify-center space-x-2 rounded-md border-2 border-gray-600 transition-all duration-100 ease-in-out hover:scale-105 focus:outline-none dark:border-stone-700`}
     >
       {loading ? (
-        <LoadingDots theme="dark" />
+        <LoadingDots color="#A8A29E" />
       ) : (
         <>
           <EthLogo />

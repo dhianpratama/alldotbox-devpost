@@ -117,7 +117,7 @@ export default function DomainCard({ data }: { data: any }) {
               </a>
 
               {loading ? (
-                <LoadingDots theme="dark"/>
+                <LoadingDots color="#A8A29E"/>
               ) : !status || status === "Valid Configuration" || !domainJson ? (
                 <span className="flex items-center rounded-md bg-green-100 p-1  text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
                   <p className="w-10">● Live</p>

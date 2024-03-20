@@ -19,15 +19,15 @@
   margin: 0 1px;
 }
 
-/* .loading span:nth-of-type(2) {
+.loading span:nth-of-type(2) {
   animation-delay: 0.2s;
 }
 
 .loading span:nth-of-type(3) {
   animation-delay: 0.4s;
-} */
+}
 
-.loading span:nth-child(1) {
+/* .loading span:nth-child(1) {
   background-color: var(--dot-color, #000);
 }
 
@@ -37,7 +37,7 @@
 
 .loading span:nth-child(3) {
   background-color: var(--dot-color, #000);
-}
+} */
 
 @keyframes blink {
   0% {
