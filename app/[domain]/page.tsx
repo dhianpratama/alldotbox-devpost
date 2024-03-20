@@ -87,7 +87,7 @@ export default async function SiteHomePage({
           <p className="text-lg text-white sm:text-xl  md:px-4  md:text-2xl lg:text-3xl">
             {data?.description}
           </p>
-          <div className="flex flex-col items-center justify-center gap-x-4 gap-y-6 md:flex-row md:px-16">
+          <div className="flex  items-center justify-center gap-x-2 gap-y-6 flex-row md:px-16">
             {data?.buttonLink && (
               <a
                 style={{
