@@ -184,9 +184,24 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   }
 }
 
-.slick-slide {
-  /* padding:10px; */
-  /* text-align:center; */
-  /* margin-right:15px;
-  margin-left:15px; */
+.marquee {
+  display: flex;
+  align-items: center;
+  cursor: -webkit-grab;
+  z-index: 1;
 }
+
+.item {
+  font-size: 30vw;
+  padding-right: 0.25em;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  color: white;
+}
+
+.drag {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
