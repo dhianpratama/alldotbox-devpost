@@ -117,7 +117,7 @@ export default function DomainCard({ data }: { data: any }) {
               </a>
 
               {loading ? (
-                <LoadingDots />
+                <LoadingDots theme="dark"/>
               ) : !status || status === "Valid Configuration" || !domainJson ? (
                 <span className="flex items-center rounded-md bg-green-100 p-1  text-sm font-medium text-green-600 transition-colors hover:bg-green-200 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400 dark:hover:bg-green-800 dark:hover:bg-opacity-50">
                   <p className="w-10">● Live</p>
@@ -125,21 +125,23 @@ export default function DomainCard({ data }: { data: any }) {
               ) : (
                 <div className="group relative flex">
                   <span className="flex items-center rounded-md bg-red-100 p-1  text-sm font-medium text-red-600 transition-colors hover:bg-red-200 dark:bg-red-900 dark:bg-opacity-50 dark:text-red-400 dark:hover:bg-red-800 dark:hover:bg-opacity-50">
-                    <p className="w-25">● Invalid</p>
+                    <p className="w-14">● Invalid</p>
                   </span>
-                  <span
+                  <div
                     style={{
-                      marginTop: "40px",
+                      marginTop: "38px",
+                      zIndex:9,
                     }}
-                    className="translate-y-auto absolute left-3 m-4 mx-auto -translate-x-1/2 rounded-md bg-gray-800 px-1 text-sm text-gray-100 opacity-0 transition-opacity group-hover:opacity-100"
+                    className="translate-y-auto absolute mx-auto -translate-x-3/4 rounded-md dark:bg-stone-800 bg-stone-100 dark:text-stone-300 px-1 text-sm text-black  opacity-0 transition-opacity group-hover:opacity-100"
+                    // className="translate-y-auto absolute left-0 md:left-5 m-4 mx-auto -translate-x-full rounded-md bg-gray-800 px-1 text-sm text-gray-100 opacity-0 transition-opacity group-hover:opacity-100"
                   >
-                    <div className="flex flex-wrap">
-                      <span>DNS Configuration is Invalid.</span>
-                      <span>
-                        <a>See tutorial</a>
-                      </span>
+                    <div className="flex flex-wrap w-52 p-2">
+                      <div>DNS Configuration is Invalid.</div>
+                      <div>
+                        <a href="" className="underline" target="_blank">See tutorial</a>
+                      </div>
                     </div>
-                  </span>
+                  </div>
                 </div>
               )}
             </div>
