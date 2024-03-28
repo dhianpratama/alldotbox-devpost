@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import { config } from "@/lib/wagmi";
+import { getEnsName } from "@wagmi/core";
 
 export default async function Profile() {
   const session = await getSession();
@@ -10,6 +12,10 @@ export default async function Profile() {
   if (!session?.user) {
     redirect("/login");
   }
+
+  const ensName = await getEnsName(config, {
+    address: `0x${session?.user?.address?.substring(2)}`,
+  });
 
   return (
     <div className="flex w-full items-center justify-between">
@@ -25,7 +31,7 @@ export default async function Profile() {
           className="h-6 w-6 rounded-full"
         />
         <span className="truncate text-sm font-medium">
-          {session?.user?.address}
+          {ensName || session?.user?.address}
         </span>
       </span>
       <LogoutButton />
