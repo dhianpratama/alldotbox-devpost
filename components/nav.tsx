@@ -40,7 +40,8 @@ export default function Nav({ children }: { children: ReactNode }) {
 
   const externalLinks = [
     {
-      name: "Buy on 3DNS",
+      // name: "Buy on 3DNS",
+      name: "Register Domain",
       href: reservoir[registry.THREEDNS].referralLink,
       icon: (
         <svg
