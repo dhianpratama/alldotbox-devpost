@@ -35,12 +35,21 @@ export const reservoir: Reservoir = {
     referralLink:"https://www.namefi.io/",
     openSeaLink:"https://opensea.io/assets/ethereum/0x0000000000cf80e7cf8fa4480907f692177f8e06"
   },
+  "unstoppable-domain": {
+    url: "https://api.reservoir.tools",
+    contract: "0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe",
+    chainId: 1,
+    logo:"/ud.png",
+    referralLink:"https://unstoppabledomains.com/",
+    openSeaLink:"https://opensea.io/assets/ethereum/0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe"
+  },
 };
 
 export const enum registry {
   BOX = "box",
   THREEDNS = "3dns-powered-domains",
   NAMEFI = "namefinft",
+  UD = "unstoppable-domain"
 }
 
 export const getRegistryByContract = (contract: string): ReservoirEntry => {
