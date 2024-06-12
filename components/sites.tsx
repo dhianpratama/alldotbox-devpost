@@ -15,22 +15,19 @@ export default async function Sites({ limit }: { limit?: number }) {
     redirect("/login");
   }
 
-  // const { tokens: boxTokens } = await getUserDomains(
-  //   session.user.address,
-  //   registry.BOX,
-  // );
-
-  const { tokens: threeDNSTokens } = await getUserDomains(
-    session.user.address,
+  const [ 
+    { tokens: threeDNSTokens },
+    { tokens: namefiTokens },
+    { tokens: udEthTokens },
+    { tokens: udPolygonTokens } 
+  ] = await Promise.all([
     registry.THREEDNS,
-  );
-
-  const { tokens: namefiTokens } = await getUserDomains(
-    session.user.address,
     registry.NAMEFI,
-  );
+    registry.UD_ETH,
+    registry.UD_POLYGON].map((r) => getUserDomains(session.user.address, r))
+  )
 
-  const tokens = [...threeDNSTokens, ...namefiTokens];
+  const tokens = [...threeDNSTokens, ...namefiTokens, ...udEthTokens, ...udPolygonTokens];
 
   const sites = await prisma.site.findMany({
     where: {

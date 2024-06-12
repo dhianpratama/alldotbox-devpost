@@ -5,6 +5,7 @@ import CustomBuyButton from "./custom-buy-button";
 import { getRegistryByContract, registry, reservoir } from "@/lib/config";
 import { InteractiveMarquee } from "@/components/marquee";
 import TextSlider from "@/components/name-slider";
+import tinycolor from "tinycolor2";
 
 export default async function SiteHomePage({
   params,
@@ -47,6 +48,8 @@ export default async function SiteHomePage({
       : "";
 
   
+  const contactButtonBackgroundColor = data?.buttonColor || "#dc2751";
+  const contactButtonTextColor = tinycolor(contactButtonBackgroundColor).isDark() ? '#FFFFFF' : '#000000';
 
   return (
     <>
@@ -115,9 +118,9 @@ export default async function SiteHomePage({
             {data?.buttonLink && (
               <a
                 style={{
-                  backgroundColor: data?.buttonColor || "#dc2751",
+                  backgroundColor: contactButtonBackgroundColor,
                   borderColor: data?.buttonColor || "#dc2751",
-                  color: data?.buttonTextColor || "#FFFFFF",
+                  color: contactButtonTextColor,
                 }}
                 href={`${data?.buttonLink}`}
                 target="_blank"
