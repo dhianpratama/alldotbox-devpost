@@ -18,14 +18,16 @@ export default async function Sites({ limit }: { limit?: number }) {
   const [ 
     { tokens: threeDNSTokens },
     { tokens: namefiTokens },
-    { tokens: udTokens } 
+    { tokens: udEthTokens },
+    { tokens: udPolygonTokens } 
   ] = await Promise.all([
     registry.THREEDNS,
     registry.NAMEFI,
-    registry.UD].map((r) => getUserDomains(session.user.address, r))
+    registry.UD_ETH,
+    registry.UD_POLYGON].map((r) => getUserDomains(session.user.address, r))
   )
 
-  const tokens = [...threeDNSTokens, ...namefiTokens, ...udTokens];
+  const tokens = [...threeDNSTokens, ...namefiTokens, ...udEthTokens, ...udPolygonTokens];
 
   const sites = await prisma.site.findMany({
     where: {
