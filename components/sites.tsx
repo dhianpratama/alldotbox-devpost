@@ -27,7 +27,22 @@ export default async function Sites({ limit }: { limit?: number }) {
     registry.UD_POLYGON].map((r) => getUserDomains(session.user.address, r))
   )
 
-  const tokens = [...threeDNSTokens, ...namefiTokens, ...udEthTokens, ...udPolygonTokens];
+  const filterTokensByTlds = (tokens: any[], tlds?: string[]) => {
+    return tokens.filter((t) => {
+      const tld = t.token?.name?.split(".").pop();
+      if (tlds && tlds?.length > 0) {
+        return tlds.includes(tld);
+      }
+      return true;
+    })
+  }
+
+  const tokens = [
+    ...threeDNSTokens,
+    ...namefiTokens,
+    ...filterTokensByTlds(udEthTokens, ["com"]),
+    ...filterTokensByTlds(udPolygonTokens, ["com"])
+  ]
 
   const sites = await prisma.site.findMany({
     where: {
