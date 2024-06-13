@@ -45,6 +45,10 @@ export default function DomainConfiguration({
       setRecordType("ALIAS");
     } else if (contract === reservoir[registry.NAMEFI].contract) {
       setRecordType("A");
+    } else if (contract === reservoir[registry.UD_ETH].contract) {
+      setRecordType("A");
+    } else if (contract === reservoir[registry.UD_POLYGON].contract) {
+      setRecordType("A");
     } else if (contract === reservoir[registry.THREEDNS].contract) {
       setRecordType("ALIAS");
     }
